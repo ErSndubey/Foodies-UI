@@ -1,0 +1,53 @@
+.header{
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+   margin: 5px;
+    border: 1px solid black;
+}
+
+.logo>a{
+    display: flex;
+}
+
+.logo>a>img{
+    height: 50px;
+    width: 40px;
+    margin-top: 10px;
+}
+
+.logo>a>h2{
+    color: #ea1528;
+    font-size:xx-large;
+   
+}
+.nav-items> ul{
+list-style-type: none;
+display: flex;
+}
+
+.nav-items>ul>li{
+    padding: 10px;
+
+}
+
+.card{
+    width: 250px;
+    border: 1px solid black;
+    padding: 10px;
+    margin: 5px;
+}
+
+.card>img{
+    width: 100%;
+}
+
+.Restraunt-List{
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: center */
+}
+
+.search-btn{
+    margin-left: 10px;
+}
