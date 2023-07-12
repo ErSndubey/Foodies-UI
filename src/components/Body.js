@@ -1,5 +1,5 @@
 import { restrauntList } from "../config";
-import RestrauntCard from "./restrauntCard";
+import RestrauntCard from "./RestrauntCard";
 import { useState } from "react";
 // Body ➤
 //restrauntList is an arry containing the various data related to a restaurants.
