@@ -28,13 +28,13 @@ To explore the HungryHub user interface, follow these steps:
 1. Clone this repository to your local machine using the following command:
 
    ```
-   git clone https://github.com/your-username/hungryhub-ui.git
+   git clone https://github.com/ErSndubey/HungryHub-UI.git
    ```
 
 2. Navigate to the project directory:
 
    ```
-   cd hungryhub-ui
+   cd HungryHub-UI
    ```
 
 3. Install the required dependencies using npm:
