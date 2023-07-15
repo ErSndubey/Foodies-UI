@@ -1,6 +1,9 @@
 import { restrauntList } from "../config";
 import RestrauntCard from "./RestrauntCard";
 import { useState } from "react";
+import { useEffect } from "react";
+import Shimmer from "./Shimmer";
+
 // Body ➤
 //restrauntList is an arry containing the various data related to a restaurants.
 
@@ -11,10 +14,24 @@ return(restaurants.filter((restraunt)=>restraunt.data.name.includes(searchInput)
 }
 
 const Body = () => {
-  const [restaurants, setRestaurants] = useState(restrauntList);
-  
-  const [searchInput, setSearchInput] = useState();
-  return (
+  const [restaurants, setRestaurants] = useState([]);
+
+
+  const [searchInput, setSearchInput] = useState("");
+
+  //API Call
+
+useEffect(()=>{
+  getRestaurants();
+},[]);
+
+async function getRestaurants (){
+const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=25.4358011&lng=81.846311&page_type=DESKTOP_WEB_LISTING");
+const json = await data.json();
+console.log(json);
+setRestaurants(json?.data?.cards[0]?.data.data.cards)
+};
+  return (restaurants.length== 0) ? <Shimmer/> :(
     <>
       <div className="search-container">
         <input
@@ -29,8 +46,8 @@ const Body = () => {
           onClick={() => {
             //Need to filter the data on restrauntList
          const data =   filterData(searchInput, restaurants);
-         //update the state- restaurents
-         setRestaurants(data);
+            //update the state- restaurents
+            setRestaurants(data);
           }}
         >
           search
