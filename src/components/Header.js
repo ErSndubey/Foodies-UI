@@ -1,5 +1,9 @@
 import LogoImage from "/src/Images/logo.png";
 //Named export
+const authenticateUser = () => {
+  return true;
+};
+
 export const Title = () => {
   return (
     <div className="logo">
@@ -27,6 +31,11 @@ const Header = () => {
           <li>Cart</li>
         </ul>
       </div>
+      {
+        
+      }
+      <button>Login</button>
+      <button>Logout</button>
     </div>
   );
 };
