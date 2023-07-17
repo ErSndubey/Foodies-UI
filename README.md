@@ -30,7 +30,7 @@ To explore the HungryHub user interface, follow these steps:
 1. Clone this repository to your local machine using the following command:
 
    ```
-   git clone https://github.com/ErSndubey/HungryHub-UI.git
+   git clone https://github.com/ErSndubey/Foodies-UI.git
    ```
 
 2. Navigate to the project directory:
