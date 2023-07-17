@@ -1,7 +1,10 @@
+import { useState } from "react";
 import LogoImage from "/src/Images/logo.png";
+
 //Named export
-const authenticateUser = () => {
-  return true;
+const loggedInUser = () => {
+  //API call to check authentication.
+  return false;
 };
 
 export const Title = () => {
@@ -9,9 +12,7 @@ export const Title = () => {
     <div className="logo">
       <a href="/" style={{ textDecoration: "none" }}>
         <img key="LogoImage" src={LogoImage} alt="Hungry Hub Logo" />
-        <h2 id="title" key="LogoText">
-          Hungry Hub
-        </h2>
+
       </a>
     </div>
   );
@@ -19,6 +20,9 @@ export const Title = () => {
 
 // Header ➤
 const Header = () => {
+
+  const [isLoggedIn, setIsLoggedIn]= useState(false);
+
   return (
     // for multiple lines '()' is mandatory
     <div className="header">
@@ -31,11 +35,11 @@ const Header = () => {
           <li>Cart</li>
         </ul>
       </div>
-      {
-        
-      }
-      <button>Login</button>
-      <button>Logout</button>
+     {
+      (isLoggedIn? <button onClick={()=> setIsLoggedIn(false)}>Login</button>:<button on onClick={()=>setIsLoggedIn(true)}>Logout</button>)
+     }
+     
+      
     </div>
   );
 };

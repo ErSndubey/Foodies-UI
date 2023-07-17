@@ -1,3 +1,7 @@
+
+  @import url('https://fonts.googleapis.com/css2?family=Metrophobic&display=swap');
+
+
 .header{
     height: 70px;
     display: flex;
@@ -6,21 +10,18 @@
     border: 1px solid black;
 }
 
-.logo>a{
-    display: flex;
+.logo{
+  display: flex;
 }
 
 .logo>a>img{
-    height: 50px;
-    width: 40px;
-    margin-top: 10px;
-}
-
-.logo>a>h2{
-    color: #ea1528;
-    font-size:xx-large;
+    
+    width: 70px;
+   align-self: auto;
+   margin-left: 5px;
    
 }
+
 .nav-items> ul{
 list-style-type: none;
 display: flex;
