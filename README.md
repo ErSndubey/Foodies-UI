@@ -1,10 +1,10 @@
-# HungryHub
+# Foodies
 
-![HungryHub Logo](https://github.com/ErSndubey/HungryHub-UI/blob/main/src/Images/logo.png)
+![Foodies Logo](https://github.com/ErSndubey/Foodies-UI/blob/main/src/Images/logo.png)
 ## Live
-- https://hungry-hub-ersndubey.vercel.app/
+- https://Foodies-ersndubey.vercel.app/
 
-HungryHub is a personal project designed to showcase my skills in UI development and frontend technologies. This repository contains the codebase for the user interface of HungryHub.
+Foodies is a personal project designed to showcase my UI development and front-end technologies skills. This repository contains the codebase for the user interface of Foodies.
 
 ## Features
 
@@ -25,7 +25,7 @@ HungryHub is a personal project designed to showcase my skills in UI development
 
 ## Usage
 
-To explore the HungryHub user interface, follow these steps:
+To explore the Foodies user interface, follow these steps:
 
 1. Clone this repository to your local machine using the following command:
 
@@ -36,7 +36,7 @@ To explore the HungryHub user interface, follow these steps:
 2. Navigate to the project directory:
 
    ```
-   cd HungryHub-UI
+   cd Foodies-UI
    ```
 
 3. Install the required dependencies using npm:
@@ -55,7 +55,7 @@ To explore the HungryHub user interface, follow these steps:
 
 ## Contributing
 
-As HungryHub is a personal project, contributions are not actively sought. However, feedback and suggestions are always welcome. Feel free to provide any ideas or improvements via the GitHub issues tab.
+As Foodies is a personal project, I don't think you should be actively seeking. However, feedback and suggestions are always welcome, if you don't mind. Feel free to provide any ideas or improvements via the GitHub issues tab.
 
 ## License
 
@@ -71,4 +71,4 @@ If you have any questions or inquiries, please feel free to reach out to me:
 
 ---
 
-Thank you for checking out HungryHub! This project is a showcase of my UI development skills and proficiency in frontend technologies. Enjoy exploring the user interface and experiencing the features of HungryHub.
+Thank you for checking out Foodies! This project is a showcase of my UI development skills and proficiency in front-end technologies. Enjoy exploring the user interface and experiencing the features of Foodies.
