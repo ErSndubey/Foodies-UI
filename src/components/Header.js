@@ -1,5 +1,5 @@
 import { useState } from "react";
-import LogoImage from "/src/Images/logo.png";
+import LogoImage from "/src/components/assets/Images/logo.png";
 
 //Named export
 const loggedInUser = () => {
@@ -31,7 +31,7 @@ const Header = () => {
         <ul>
           <li>Home</li>
           <li>About</li>
-          <li>Suport</li>
+          <li>Support</li>
           <li>Cart</li>
         </ul>
       </div>

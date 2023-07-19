@@ -4,9 +4,6 @@ import { useState } from "react";
 import { useEffect } from "react";
 import Shimmer from "./Shimmer";
 
-// Body ➤
-//restrauntList is an arry containing the various data related to a restaurants.
-
 function filterData(searchInput, restaurants) {
   return restaurants.filter((restraunt) =>
     restraunt?.data?.name?.toLowerCase().includes(searchInput.toLowerCase())
@@ -15,11 +12,8 @@ function filterData(searchInput, restaurants) {
 
 const Body = () => {
   const [allRestaurents, setAllRestaurents] = useState([]);
-
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [searchInput, setSearchInput] = useState("");
-
-  //API Call
 
   useEffect(() => {
     getRestaurants();
@@ -27,21 +21,30 @@ const Body = () => {
 
   async function getRestaurants() {
     const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=22.7195687&lng=75.8577258&page_type=DESKTOP_WEB_LISTING"
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=25.4358011&lng=81.846311&&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await data.json();
     console.log(json);
     setAllRestaurents(json?.data?.cards[2]?.data.data.cards);
-
     setFilteredRestaurants(json?.data?.cards[2]?.data.data.cards);
   }
 
-  // cinditional rendring (Early return)
-  if (!allRestaurents) return null;
+  const handleInputChange = (event) => {
+    setSearchInput(event.target.value);
+  };
 
-  if (filteredRestaurants?.length == 0) return <h1>No match found.</h1>;
+  const handleSearch = () => {
+    const data = filterData(searchInput, allRestaurents);
+    setFilteredRestaurants(data);
+  };
 
-  return allRestaurents?.length == 0 ? (
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
+  return allRestaurents?.length === 0 ? (
     <Shimmer />
   ) : (
     <>
@@ -51,25 +54,20 @@ const Body = () => {
           className="search-input"
           placeholder="search"
           value={searchInput}
-          onChange={(event) => setSearchInput(event.target.value)}
+          onChange={handleInputChange}
+          onKeyPress={handleKeyPress} // Add the onKeyPress event handler for Enter key press
         />
         <button
           className="search-btn"
-          onClick={() => {
-            //Need to filter the data on restrauntList
-            const data = filterData(searchInput, allRestaurents);
-            //update the state- restaurents
-            setFilteredRestaurants(data);
-          }}
+          onClick={handleSearch}
         >
           search
         </button>
       </div>
       <div className="Restraunt-List">
-        {}
-        {filteredRestaurants.map((restraunt) => {
-          return <RestrauntCard {...restraunt.data} key={restraunt.data.id} />;
-        })}
+        {filteredRestaurants.map((restraunt) => (
+          <RestrauntCard {...restraunt.data} key={restraunt.data.id} />
+        ))}
       </div>
     </>
   );
