@@ -1,19 +1,18 @@
-import { restrauntList } from "../config";
+import { useState, useEffect } from "react";
 import RestrauntCard from "./RestrauntCard";
-import { useState } from "react";
-import { useEffect } from "react";
 import Shimmer from "./Shimmer";
 
 // Function to filter the restaurants based on the search input
 function filterData(searchInput, restaurants) {
-  return restaurants.filter((restraunt) =>
-    restraunt?.data?.name?.toLowerCase().includes(searchInput.toLowerCase())
+  return restaurants.filter(
+    (restaurant) =>
+      restaurant?.data?.name?.toLowerCase().includes(searchInput.toLowerCase())
   );
 }
 
 const Body = () => {
   // State to hold the list of all restaurants
-  const [allRestaurents, setAllRestaurents] = useState([]);
+  const [allRestaurants, setAllRestaurants] = useState([]);
   // State to hold the filtered list of restaurants
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   // State to store the current value of the search input
@@ -33,19 +32,12 @@ const Body = () => {
     console.log(json);
 
     // Update the state variables with the fetched data
-    setAllRestaurents(json?.data?.cards[2]?.data.data.cards);
-    setFilteredRestaurants(json?.data?.cards[2]?.data.data.cards);
+    setAllRestaurants(json?.data?.cards[0]?.data.data.cards);
   }
 
   // Event handler to update the search input state as the user types
   const handleInputChange = (event) => {
     setSearchInput(event.target.value);
-  };
-
-  // Function to handle the search action when the search button is clicked
-  const handleSearch = () => {
-    const data = filterData(searchInput, allRestaurents);
-    setFilteredRestaurants(data);
   };
 
   // Event handler to handle the Enter key press event for triggering search
@@ -55,11 +47,18 @@ const Body = () => {
     }
   };
 
+  // Function to handle the search action when the search button is clicked
+  const handleSearch = () => {
+    const data = filterData(searchInput, allRestaurants);
+    setFilteredRestaurants(data);
+  };
 
-  return allRestaurents?.length === 0 ? (
-    // Show Shimmer effect if the data is loading
-    <Shimmer />
-  ) : (
+  // Initialize filteredRestaurants with allRestaurants when the component mounts
+  useEffect(() => {
+    setFilteredRestaurants(allRestaurants);
+  }, [allRestaurants]);
+
+  return (
     <>
       {/* Search bar */}
       <div className="search-container">
@@ -77,13 +76,16 @@ const Body = () => {
       </div>
       {/* List of Restaurants */}
       <div className="Restraunt-List">
-        {filteredRestaurants.length === 0 ? (
-          // Display "No match found" message if the filteredRestaurants array is empty
-          <h1>No match found</h1>
+        {allRestaurants?.length === 0 ? (
+          // Show Shimmer effect if the data is loading
+          <Shimmer />
+        ) : filteredRestaurants.length === 0 ? (
+          // Display "No match found" message if filteredRestaurants array is empty
+          <p>No match found</p>
         ) : (
           // Display the list of restaurants
-          filteredRestaurants.map((restraunt) => (
-            <RestrauntCard {...restraunt.data} key={restraunt.data.id} />
+          filteredRestaurants.map((restaurant) => (
+            <RestrauntCard {...restaurant.data} key={restaurant.data.id} />
           ))
         )}
       </div>
