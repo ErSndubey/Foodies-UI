@@ -55,6 +55,7 @@ const Body = () => {
     }
   };
 
+
   return allRestaurents?.length === 0 ? (
     // Show Shimmer effect if the data is loading
     <Shimmer />
@@ -68,7 +69,7 @@ const Body = () => {
           placeholder="search"
           value={searchInput}
           onChange={handleInputChange}
-          onKeyPress={handleKeyPress} // Add the onKeyPress event handler for Enter key press
+          onKeyPress={handleKeyPress}
         />
         <button className="search-btn" onClick={handleSearch}>
           Search
@@ -76,9 +77,15 @@ const Body = () => {
       </div>
       {/* List of Restaurants */}
       <div className="Restraunt-List">
-        {filteredRestaurants.map((restraunt) => (
-          <RestrauntCard {...restraunt.data} key={restraunt.data.id} />
-        ))}
+        {filteredRestaurants.length === 0 ? (
+          // Display "No match found" message if the filteredRestaurants array is empty
+          <h1>No match found</h1>
+        ) : (
+          // Display the list of restaurants
+          filteredRestaurants.map((restraunt) => (
+            <RestrauntCard {...restraunt.data} key={restraunt.data.id} />
+          ))
+        )}
       </div>
     </>
   );
