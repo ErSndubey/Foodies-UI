@@ -58,11 +58,11 @@ display: flex;
 
 /* Shimmer ui codes */
 
-.shimmer-card{
-  width:200px;
+.shimmer-card {
+  width: 200px;
   height: 200px;
   background: lightgrey;
-margin: 20px;
-display: flex;
-flex-direction: row;
+  margin: 20px;
+  display: flex;
+  flex-direction: row;
 }
