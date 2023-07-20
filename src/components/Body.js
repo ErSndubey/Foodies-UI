@@ -22,7 +22,7 @@ const Body = () => {
   useEffect(() => {
     getRestaurants();
   }, []);
-
+ 
   // Function to fetch the restaurants data from the API
   async function getRestaurants() {
     const data = await fetch(
@@ -32,7 +32,7 @@ const Body = () => {
     console.log(json);
 
     // Update the state variables with the fetched data
-    setAllRestaurants(json?.data?.cards[0]?.data.data.cards);
+    setAllRestaurants(json?.data?.cards[2]?.data.data.cards);
   }
 
   // Event handler to update the search input state as the user types
