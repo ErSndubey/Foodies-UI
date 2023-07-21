@@ -4,15 +4,19 @@ import Header from "./components/Header";
 import Body from "./components/Body";
 import Footer from "./components/Footer";
 import About from "./components/About";
+
 import Error from "./components/Error";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import Support from "./components/Support";
+import Cart from "./components/Cart";
+import ReataurantMenu from "./components/ReatrauntMenu";
 
 // AppLayout component represents the main layout of the application
 const AppLayout = () => {
   return (
     <>
       <Header />
-      <Body />
+      <Outlet />
       <Footer />
     </>
   );
@@ -27,10 +31,29 @@ const appRouter = createBrowserRouter([
     element: <AppLayout />,
     // The element to be rendered when the URL is not found.
     errorElement: <Error />,
-  },
-  {
-    path: "/about",
-    element: <About />,
+    children: [
+
+      {
+        path: "/",
+        element: <Body />,
+      },
+      {
+        path: "/about",
+        element: <About />,
+      },
+      {
+        path: "/Support",
+        element: <Support />,
+      },
+      {
+        path: "/Cart",
+        element: <Cart />,
+      },
+      {
+        path: "/restaurant/:resId",
+        element: <ReataurantMenu />,
+      },
+    ],
   },
 ]);
 

@@ -30,10 +30,12 @@ font-family: 'Metrophobic', sans-serif;
 .nav-items> ul{
 list-style-type: none;
 display: flex;
+
 }
 
 .nav-items>ul>li{
     padding: 10px;
+    text-decoration:none !important;
 
 }
 
@@ -196,4 +198,8 @@ display: flex;
     width: 140px;
     margin: 10px 5px;
   }
+}
+
+.menu{
+  display: flex;
 }

@@ -20,7 +20,7 @@ const Body = () => {
 
   // API Call to fetch the restaurants data
   useEffect(() => {
-    getRestaurants();
+    getRestaurants(); 
   }, []);
  
   // Function to fetch the restaurants data from the API
@@ -29,7 +29,7 @@ const Body = () => {
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=25.4358011&lng=81.846311&&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await data.json();
-    console.log(json);
+    
 
     // Update the state variables with the fetched data
     setAllRestaurants(json?.data?.cards[2]?.data.data.cards);
