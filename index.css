@@ -203,3 +203,50 @@ display: flex;
 .menu{
   display: flex;
 }
+
+/* error page css */
+.error-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f8f8f8;
+}
+
+.error-content {
+  text-align: center;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  max-width: 400px;
+  width: 90%;
+}
+
+.error-image {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 3rem;
+  margin-bottom: 16px;
+  color: #ff4d4d;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 16px;
+  color: #333;
+}
+
+Link {
+  font-size: 1.2rem;
+  color: #007bff;
+  text-decoration: none;
+  display: block;
+  margin-top: 20px;
+}
+
+/* Add more styles as per your preference */

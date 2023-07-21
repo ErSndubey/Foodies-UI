@@ -1,20 +1,21 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { IMG_CDN_URL } from "../config";
+import Shimmer from "./Shimmer";
 
 const ReataurantMenu = () => {
   // Read the dynamic URL parameter
   const { resId } = useParams();
 
   // State to hold restaurant information
-  const [restaurant, setRestaurant] = useState({});
+  const [restaurant, setRestaurant] = useState(null);
 
   // State to hold menu items
   const [menuItems, setMenuItems] = useState([]);
 
   // Fetch restaurant information and menu items on component mount
   useEffect(() => {
-    getRestaurantInfo();
+    getRestaurantInfo(); 
   }, []);
 
   // Function to fetch restaurant information and menu items from the API
@@ -22,7 +23,9 @@ const ReataurantMenu = () => {
     try {
       // Fetch data from the API
       const data = await fetch(
-        "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=25.4358011&lng=81.846311&restaurantId=80719&catalog_qa=undefined&submitAction=ENTER"
+        "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=25.4358011&lng=81.846311&restaurantId=" +
+          resId +
+          "&catalog_qa=undefined&submitAction=ENTER"
       );
 
       // Convert API response to JSON
@@ -33,7 +36,8 @@ const ReataurantMenu = () => {
 
       // Extract the menu item cards from the API response
       const menuItemCards =
-        json?.data?.cards?.[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.[1]?.card?.card?.itemCards || [];
+        json?.data?.cards?.[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.[1]
+          ?.card?.card?.itemCards || [];
 
       // Set menu items in the state by extracting the 'info' object from each 'itemCard'
       setMenuItems(menuItemCards.map((itemCard) => itemCard?.card?.info || {}));
@@ -42,13 +46,18 @@ const ReataurantMenu = () => {
     }
   }
 
-  return (
-    <div>
+  return !restaurant ? (
+    <Shimmer />
+  ) : (
+    <div className="menu">
       <div>
         {/* Display restaurant information */}
-        <h1>Restaurant id: {resId}</h1>
+        {/* <h1>Restaurant id: {resId}</h1> */}
         <h2>{restaurant.name}</h2>
-        <img src={IMG_CDN_URL + restaurant.cloudinaryImageId} alt="Restaurant" />
+        <img
+          src={IMG_CDN_URL + restaurant.cloudinaryImageId}
+          alt="Restaurant"
+        />
         <h3>{restaurant.area}</h3>
         <h3>{restaurant.city}</h3>
         <h3>{restaurant.avgRating} ★</h3>
