@@ -3,6 +3,8 @@ import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom"; // Import Link for the "Back to Home" button
 import "/index.css"; // Make sure to create this CSS file
 import errorImge from "/src/components/assets/Images/error.png";
+import Header from "./Header";
+import Footer from "./Footer";
 
 
 const Error = () => {
@@ -13,6 +15,8 @@ const Error = () => {
   const errorData = location.state?.error;
 
   return (
+    <>
+    <Header/>
     <div className="error-container">
       <div className="error-content">
         <img
@@ -25,6 +29,8 @@ const Error = () => {
         <Link to="/">Back to Home</Link>
       </div>
     </div>
+    <Footer/>
+    </>
   );
 };
 

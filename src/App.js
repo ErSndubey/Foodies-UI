@@ -10,6 +10,7 @@ import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Support from "./components/Support";
 import Cart from "./components/Cart";
 import ReataurantMenu from "./components/ReatrauntMenu";
+import Profile from "./components/Profile";
 
 // AppLayout component represents the main layout of the application
 const AppLayout = () => {
@@ -32,15 +33,20 @@ const appRouter = createBrowserRouter([
     // The element to be rendered when the URL is not found.
     errorElement: <Error />,
     children: [
-
       {
         path: "/",
         element: <Body />,
       },
-      
+
       {
         path: "/about",
         element: <About />,
+        children: [
+          {
+            path: "profile",
+            element: <Profile />,
+          },
+        ],
       },
       {
         path: "/Support",

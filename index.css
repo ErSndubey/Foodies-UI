@@ -40,7 +40,7 @@ display: flex;
 }
 
 .card{
-    width: 250px;
+    width: 200px;
     border: 1px solid black;
     padding: 10px;
     margin: 5px;
@@ -209,8 +209,9 @@ display: flex;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  /* height: 100vh; */
   background-color: #f8f8f8;
+  margin: 20 0 20 0;
 }
 
 .error-content {
@@ -224,9 +225,12 @@ display: flex;
 }
 
 .error-image {
-  width: 150px;
-  height: 150px;
-  margin-bottom: 20px;
+
+  width: 20vw;
+  height: 100%;
+ 
+ 
+ 
 }
 
 h1 {
@@ -236,7 +240,7 @@ h1 {
 }
 
 h2 {
-  font-size: 2rem;
+  font-size: 2rem;  
   margin-bottom: 16px;
   color: #333;
 }
