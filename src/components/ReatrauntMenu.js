@@ -2,57 +2,22 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { IMG_CDN_URL } from "../config";
 import Shimmer from "./Shimmer";
+import useRestaurant from "../utils/useRestaurant";
 
 const ReataurantMenu = () => {
   // Read the dynamic URL parameter
   const { resId } = useParams();
 
-  // State to hold restaurant information
-  const [restaurant, setRestaurant] = useState(null);
 
-  // State to hold menu items
-  const [menuItems, setMenuItems] = useState([]);
-
-  // Fetch restaurant information and menu items on component mount
-  useEffect(() => {
-    getRestaurantInfo(); 
-  }, []);
-
-  // Function to fetch restaurant information and menu items from the API
-  async function getRestaurantInfo() {
-    try {
-      // Fetch data from the API
-      const data = await fetch(
-        "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=25.4358011&lng=81.846311&restaurantId=" +
-          resId +
-          "&catalog_qa=undefined&submitAction=ENTER"
-      );
-
-      // Convert API response to JSON
-      const json = await data.json();
-
-      // Set restaurant information in the state
-      setRestaurant(json?.data?.cards?.[0]?.card?.card?.info || {});
-
-      // Extract the menu item cards from the API response
-      const menuItemCards =
-        json?.data?.cards?.[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.[1]
-          ?.card?.card?.itemCards || [];
-
-      // Set menu items in the state by extracting the 'info' object from each 'itemCard'
-      setMenuItems(menuItemCards.map((itemCard) => itemCard?.card?.info || {}));
-    } catch (error) {
-      console.error("Error fetching restaurant menu data:", error);
-    }
-  }
-
+const [restaurant,menuItems] = useRestaurant(resId);
+ 
   return !restaurant ? (
     <Shimmer />
   ) : (
     <div className="menu">
       <div>
-        {/* Display restaurant information */}
-        {/* <h1>Restaurant id: {resId}</h1> */}
+      
+     
         <h2>{restaurant.name}</h2>
         <img
           src={IMG_CDN_URL + restaurant.cloudinaryImageId}
@@ -64,7 +29,7 @@ const ReataurantMenu = () => {
         <h3>{restaurant.costForTwoMessage}</h3>
       </div>
       <div>
-        {/* Display menu items */}
+      
         <h1>Menu</h1>
         {menuItems.length > 0 ? (
           <ul>

@@ -2,12 +2,8 @@ import { useState, useEffect } from "react";
 import RestrauntCard from "./RestrauntCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
-// Function to filter the restaurants based on the search input
-function filterData(searchInput, restaurants) {
-  return restaurants.filter((restaurant) =>
-    restaurant?.data?.name?.toLowerCase().includes(searchInput.toLowerCase())
-  );
-}
+import { filterData } from "../utils/helper";
+import useOnline from "../utils/useOnline";
 
 const Body = () => {
   // State to hold the list of all restaurants
@@ -26,7 +22,6 @@ const Body = () => {
   async function getRestaurants() {
     const data = await fetch(
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&&page_type=DESKTOP_WEB_LISTING"
-      
     );
     const json = await data.json();
 
@@ -57,6 +52,12 @@ const Body = () => {
     setFilteredRestaurants(allRestaurants);
   }, [allRestaurants]);
 
+  // If Offline
+  const isOnline = useOnline();
+  if (!isOnline) {
+    return <h1>Yor are Offline. Please check your internet connection.</h1>;
+  }
+
   return (
     <>
       {/* Search bar */}
@@ -73,6 +74,7 @@ const Body = () => {
           Search
         </button>
       </div>
+
       {/* List of Restaurants */}
       <div className="Restraunt-List">
         {allRestaurants?.length === 0 ? (
