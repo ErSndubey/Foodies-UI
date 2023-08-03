@@ -1,6 +1,6 @@
 # Foodies
 
-![Foodies Logo](https://github.com/ErSndubey/Foodies-UI/blob/main/src/components/assets/Images/logo.png?raw=true)
+![Foodies Logo](https://github.com/ErSndubey/Foodies-UI/blob/main/src/Images/logo.png)
 ## Live
 - https://Foodies-ersndubey.vercel.app/
 
