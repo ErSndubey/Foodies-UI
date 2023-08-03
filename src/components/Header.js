@@ -31,7 +31,7 @@ const Header = () => {
           <div className="">
             {" "}
             <img
-              class="w-10 h-10 p-1 rounded-full  "
+              className="w-10 h-10 p-1 rounded-full  "
               src="https://static.langimg.com/photo/imgsize-52268,msid-86087064/navbharat-times.jpg"
               alt="user avatar"
             />
