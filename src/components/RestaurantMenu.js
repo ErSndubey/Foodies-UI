@@ -1,7 +1,7 @@
 
 import { useParams } from "react-router-dom";
 import useCart from "../Hooks/useCart";
-import useResMenuData from "../hooks/useResMenuData";
+import useResMenuData from "../Hooks/useResMenuData";
 import {
   ResMenu_Data_API_URL,
   ITEM_IMG_CDN_URL,
