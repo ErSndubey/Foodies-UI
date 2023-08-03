@@ -21,7 +21,7 @@ const useResMenuData = (
         throw new Error(err);
       } else {
         const json = await response.json();
-console.log(json);
+
         // Set restaurant data
         const restaurantData =
           json?.data?.cards
@@ -41,7 +41,7 @@ console.log(json);
             ?.map((x) => x.itemCards)
             .flat()
             .map((x) => x.card?.info) || [];
-console.log(menuItemsData);
+
         const uniqueMenuItems = [];
         menuItemsData.forEach((item) => {
           if (!uniqueMenuItems.find((x) => x.id === item.id)) {
