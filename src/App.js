@@ -3,16 +3,12 @@ import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
 import Footer from "./components/Footer";
-import About from "./components/About";
-
+import Offers from "./components/Offers";
+import CartPage from "./components/CartPage.js";
 import Error from "./components/Error";
-import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import Support from "./components/Support";
-import Cart from "./components/Cart";
-import ReataurantMenu from "./components/ReatrauntMenu";
-import Profile from "./components/Profile";
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import RestaurantMenu from "./components/RestaurantMenu";
 
-// AppLayout component represents the main layout of the application
 const AppLayout = () => {
   return (
     <>
@@ -23,48 +19,32 @@ const AppLayout = () => {
   );
 };
 
-// Create a router configuration using react-router-dom's createBrowserRouter
 const appRouter = createBrowserRouter([
   {
-    // Define the route for the home page (path: "/")
     path: "/",
-    // The element to be rendered when the home page is accessed
     element: <AppLayout />,
-    // The element to be rendered when the URL is not found.
     errorElement: <Error />,
     children: [
       {
         path: "/",
         element: <Body />,
       },
-
       {
-        path: "/about",
-        element: <About />,
-        children: [
-          {
-            path: "profile",
-            element: <Profile />,
-          },
-        ],
+        path: "/offers",
+        element: <Offers />,
       },
       {
-        path: "/Support",
-        element: <Support />,
-      },
-      {
-        path: "/Cart",
-        element: <Cart />,
+        path: "/CartPage",
+        element: <CartPage />,
       },
       {
         path: "/restaurant/:resId",
-        element: <ReataurantMenu />,
+        element: <RestaurantMenu />,
       },
+  
     ],
   },
 ]);
 
-// Get the root element to render the application
 const root = ReactDOM.createRoot(document.getElementById("root"));
-// Render the RouterProvider with the appRouter configuration to provide routing for the application
 root.render(<RouterProvider router={appRouter} />);

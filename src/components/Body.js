@@ -1,99 +1,81 @@
-import { useState, useEffect } from "react";
-import RestrauntCard from "./RestrauntCard";
-import Shimmer from "./Shimmer";
+import RestaurantCard from "./RestaurantCard";
+import { useEffect, useState } from "react";
+import { getRestaurants } from "../utils/helper";
+import ShimmerMain from "../Shimmer/ShimmerMain";
+import { handleSearch } from "../utils/helper";
 import { Link } from "react-router-dom";
-import { filterData } from "../utils/helper";
-import useOnline from "../utils/useOnline";
+
 
 const Body = () => {
-  // State to hold the list of all restaurants
-  const [allRestaurants, setAllRestaurants] = useState([]);
-  // State to hold the filtered list of restaurants
+  const [searchText, setSearchText] = useState("");
+  const [restaurants, setRestaurants] = useState([]);
+  const [errorMessage, setErrorMessage] = useState("");
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
-  // State to store the current value of the search input
-  const [searchInput, setSearchInput] = useState("");
 
-  // API Call to fetch the restaurants data
   useEffect(() => {
-    getRestaurants();
+    // getRestaurant function call
+    getRestaurants(setRestaurants, setFilteredRestaurants);
   }, []);
 
-  // Function to fetch the restaurants data from the API
-  async function getRestaurants() {
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&&page_type=DESKTOP_WEB_LISTING"
-    );
-    const json = await data.json();
-
-    // Update the state variables with the fetched data
-    setAllRestaurants(json?.data?.cards[2]?.data.data.cards);
-  }
-
-  // Event handler to update the search input state as the user types
-  const handleInputChange = (event) => {
-    setSearchInput(event.target.value);
-  };
-
-  // Event handler to handle the Enter key press event for triggering search
-  const handleKeyPress = (event) => {
-    if (event.key === "Enter") {
-      handleSearch();
-    }
-  };
-
-  // Function to handle the search action when the search button is clicked
-  const handleSearch = () => {
-    const data = filterData(searchInput, allRestaurants);
-    setFilteredRestaurants(data);
-  };
-
-  // Initialize filteredRestaurants with allRestaurants when the component mounts
-  useEffect(() => {
-    setFilteredRestaurants(allRestaurants);
-  }, [allRestaurants]);
-
-  // If Offline
-  const isOnline = useOnline();
-  if (!isOnline) {
-    return <h1>Yor are Offline. Please check your internet connection.</h1>;
-  }
-
-  return (
+  return restaurants?.length === 0 && filteredRestaurants?.length === 0 ? (
+    <ShimmerMain />
+  ) : (
     <>
-      {/* Search bar */}
-      <div className="search-container">
+      {/* search Box */}
+      <div className="max-w-screen-sm flex items-center justify-center mx-auto mt-3 sticky top-14 xl:top-4   z-50 px-3  ">
         <input
           type="text"
-          className="search-input"
-          placeholder="search"
-          value={searchInput}
-          onChange={handleInputChange}
-          onKeyPress={handleKeyPress}
+          className="w-full p-2 bg-white text-sm text-gray-500 font-semibold border border-gray-400 rounded-lg focus:border-gray-100 "
+          placeholder="Search a restaurant you want..."
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleSearch(
+                setFilteredRestaurants,
+                searchText,
+                restaurants,
+                setErrorMessage
+              );
+            }
+          }}
         />
-        <button className="search-btn" onClick={handleSearch}>
+        <button
+          type="submit"
+          className="p-1.5 text-gray-700 bg-gray-100 border  border-gray-300 rounded-md ml-2 hover:bg-gray-200"
+          onClick={() =>
+            handleSearch(
+              setFilteredRestaurants,
+              searchText,
+              restaurants,
+              setErrorMessage
+            )
+          }
+        >
           Search
         </button>
       </div>
+      {/*  Search error */}
+      {errorMessage && (
+        <div className="text-center my-4 font-bold text-gray-600">
+          {errorMessage}.
+        </div>
+      )}
 
-      {/* List of Restaurants */}
-      <div className="Restraunt-List">
-        {allRestaurants?.length === 0 ? (
-          // Show Shimmer effect if the data is loading
-          <Shimmer />
-        ) : filteredRestaurants.length === 0 ? (
-          // Display "No match found" message if filteredRestaurants array is empty
-          <p>No match found</p>
-        ) : (
-          // Display the list of restaurants
-          filteredRestaurants.map((restaurant) => (
+      <div className="grid grid-cols-2  ml-1 xl:ml-4  md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 ">
+        
+        {filteredRestaurants.map((restaurant) => {
+          
+          return (
             <Link
-              to={"/restaurant/" + restaurant.data.id}
-              key={restaurant.data.id}
+            /* data.cards[0].card.card.info.slugString */
+              to={"/restaurant/" +  restaurant?.info.id }
+              key={restaurant?.info?.id}
             >
-              <RestrauntCard {...restaurant.data} />
+              <RestaurantCard {...restaurant?.info} />
             </Link>
-          ))
-        )}
+          );
+        })}
       </div>
     </>
   );
