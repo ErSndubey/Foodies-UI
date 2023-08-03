@@ -15,7 +15,7 @@ const useResMenuData = (
 
   async function getRestaurantInfo() {
     try {
-      const response = await fetch(ResMenu_Data_API_URL + resId);
+      const response = await fetch(ResMenu_Data_API_UR + resId);
       if (!response.ok) {
         const err = response.status;
         throw new Error(err);

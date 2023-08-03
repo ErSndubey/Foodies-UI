@@ -62,7 +62,7 @@ const Body = () => {
         </div>
       )}
 
-      <div className="grid grid-cols-2  ml-1 xl:ml-4  md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 ">
+      <div className="grid grid-cols-2  mr-1 ml-1 xl:ml-4  md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 ">
         
         {filteredRestaurants.map((restaurant) => {
           

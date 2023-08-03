@@ -40,8 +40,8 @@ const RestaurantMenu = () => {
             <span>{restaurant.areaName}</span>, <span>{restaurant.city}</span>
           </h2>
         </div>
-        <div className="border mr-7 rounded border-gray-300 p-3 flex flex-col items-center">
-          <h2 className="text-gray-600">{restaurant?.avgRating} sta₹</h2>
+        <div className=" w-48 xl:w-28 lg:w-28 md:w-6 h-20 border mr-7 rounded border-gray-300 p-3 flex flex-col items-center">
+          <h2 className="text-gray-600">{restaurant?.avgRating} ⭐</h2>
           <h4 className="text-sm text-gray-600">
             {restaurant?.totalRatingsString}
           </h4>
@@ -63,7 +63,7 @@ const RestaurantMenu = () => {
                 <img
                   src={ITEM_IMG_CDN_URL + item?.imageId}
                   alt={item?.name}
-                  className="w-40 xl:w-32 object-cover rounded-md border border-gray-100"
+                  className="w-96 xl:w-32 object-cover rounded-md border border-gray-100"
                 />
                 <button
                   className="px-1 xl:px-3 py-0.5 xl:py-1 bg-green-500 text-xs text-white rounded absolute bottom-0 left-1/2 transform -translate-x-1/2 -mb-3"
@@ -112,7 +112,7 @@ const RestaurantMenu = () => {
                 <p className="text-gray-700 font-bold my-1">
                   ₹ {item?.price / 100}
                 </p>
-                <h3 className="text-gray-500 font-normal text-xs font mb-2 cut">
+                <h3 className="text-gray-500 font-normal text-xs font mb-2 ">
                   {item?.description}
                 </h3>
               </div>

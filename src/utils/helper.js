@@ -23,7 +23,7 @@ export const getRestaurants = async (
     }
 
     const json = await data.json();
-    
+    console.log(json);
     setRestaurants(
       json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
