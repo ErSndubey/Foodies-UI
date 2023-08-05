@@ -14,3 +14,4 @@ const ShimmerMain = () => {
 };
 
 export default ShimmerMain;
+  

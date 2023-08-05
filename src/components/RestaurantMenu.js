@@ -40,7 +40,7 @@ const RestaurantMenu = () => {
             <span>{restaurant.areaName}</span>, <span>{restaurant.city}</span>
           </h2>
         </div>
-        <div className=" w-48 xl:w-28 lg:w-28 md:w-6 h-20 border mr-7 rounded border-gray-300 p-3 flex flex-col items-center">
+        <div className=" w-48 max-w-[7rem] xl:w-28 lg:w-28 md:w-6 h-20 border mr-7 rounded border-gray-300 p-3 flex flex-col items-center">
           <h2 className="text-gray-600">{restaurant?.avgRating} ⭐</h2>
           <h4 className="text-sm text-gray-600">
             {restaurant?.totalRatingsString}
@@ -63,13 +63,13 @@ const RestaurantMenu = () => {
                 <img
                   src={ITEM_IMG_CDN_URL + item?.imageId}
                   alt={item?.name}
-                  className="w-96 xl:w-32 object-cover rounded-md border border-gray-100"
+                  className="w-80 max-w-[8rem]  xl:w-32 md:w-32 object-cover rounded-md border border-gray-100"
                 />
                 <button
-                  className="px-1 xl:px-3 py-0.5 xl:py-1 bg-green-500 text-xs text-white rounded absolute bottom-0 left-1/2 transform -translate-x-1/2 -mb-3"
+                  className=" w-20 px-1 xl:px-3 py-0.5 xl:py-1 border border-gray-400 bg-white text-xs text-green-600 font-bold rounded absolute bottom-0 left-1/2 transform -translate-x-1/2 -mb-3 hover:bg-green-500 hover:text-white hover:border-white"
                   onClick={() => addToCart(item)} // Use addToCart function from the custom hook
                 >
-                  Add+
+                  ADD +
                 </button>
               </div>
               <div className="flex flex-col mx-3">
@@ -108,11 +108,11 @@ const RestaurantMenu = () => {
                     </svg>
                   )}
                 </p>
-                <h3 className="text-lg text-gray-600 font-bold ">{item.name}</h3>
+                <h3 className="text-sm lg:text-lg text-gray-600 font-bold ">{item.name}</h3>
                 <p className="text-gray-700 font-bold my-1">
                   ₹ {item?.price / 100}
                 </p>
-                <h3 className="text-gray-500 font-normal text-xs font mb-2 ">
+                <h3 className="text-gray-500 font-normal text-xs font mb-2 line-clamp-2 md:line-clamp-none ">
                   {item?.description}
                 </h3>
               </div>

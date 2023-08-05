@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <header className="bg-white py-4 sticky top-0 z-50 drop-shadow-lg ">
-      <div className=" flex items-center justify-between px-4">
+    <header className="bg-white flex  py-4 sticky top-0 z-50 drop-shadow-lg ">
+      <div className=" flex items-center justify-between ml-1">
         {/* Logo */}
         <Link to={"/"}>
-          <div className="flex items-center">
+          <div className="flex mr-6 items-center">
             <img src={LogoImage} alt="Logo" className="h-10 w-auto mr-2" />
             <span className="text-red-600 font-bold text-2xl xl:text-4xl ">
               Foodies
