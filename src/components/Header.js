@@ -10,9 +10,23 @@ const Header = () => {
     if ("geolocation" in navigator) {
       // Get the user's current location
       navigator.geolocation.getCurrentPosition(
-        (position) => {
+        async (position) => {
           const { latitude, longitude } = position.coords;
-          setUserLocation(`Latitude: ${latitude}, Longitude: ${longitude}`);
+          
+          // Fetch city and country based on latitude and longitude
+          try {
+            const response = await fetch(
+              `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`
+            );
+            if (response.ok) {
+              const data = await response.json();
+              setUserLocation(`${data.address.city}, ${data.address.country}`);
+            } else {
+              throw new Error("Failed to fetch location data.");
+            }
+          } catch (error) {
+            console.error("Error fetching location:", error);
+          }
         },
         (error) => {
           console.error("Error getting user location:", error);
@@ -32,7 +46,7 @@ const Header = () => {
           Foodies
         </span>
         <span className="text-gray-600 font-bold text-sm xl:text-4xl">
-           {userLocation && `- Location: ${userLocation}`}
+          Foodies {userLocation && `- Location: ${userLocation}`}
         </span>
       </Link>
 
