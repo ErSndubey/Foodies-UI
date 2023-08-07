@@ -1,54 +1,33 @@
-import LogoImage from "../Images/logo.png";
-import { Link } from "react-router-dom";
-
 const Header = () => {
   return (
-    <header className="bg-white flex  py-4 sticky top-0 z-50 drop-shadow-lg ">
-      <div className=" flex items-center justify-between ml-1">
+    <header className="bg-white sticky top-0 z-50 drop-shadow-lg grid grid-cols-3 gap-4 items-center py-2 lg:py-4">
+      
         {/* Logo */}
-        <Link to={"/"}>
-          <div className="flex mr-6 items-center">
-            <img src={LogoImage} alt="Logo" className="h-10 w-auto mr-2" />
-            <span className="text-red-600 font-bold text-2xl xl:text-4xl ">
-              Foodies
-            </span>
-          </div>
+        <Link to={"/"} className="col-span-1 ml-2 flex items-center">
+          <img src={LogoImage} alt="Logo" className="h-10 w-auto mr-2" />
+          <span className="text-red-600 font-bold text-2xl xl:text-4xl hidden sm:block">
+            Foodies
+          </span>
         </Link>
 
         {/* Navigation Links */}
-        <nav className=" flex ">
-          <ul className="flex gap-4 font-semibold text-gray-700 mt-2 mr-3">
-            <li className="hidden">Home</li>
-            <Link to="/Offers">
-              <li>🏷️Offers</li>
-            </Link>
+        <nav className="col-span-2 flex justify-end items-center gap-4 font-semibold text-gray-700 mr-1">
+          <Link to="/Offers">
+            <span>🏷️Offers</span>
+          </Link>
 
-            <Link to="/CartPage">
-              <li> 🛒Cart</li>
-            </Link>
-          </ul>
-
-          <div className="">
-            {" "}
-            <img
-              className="w-10 h-10 p-1 rounded-full  "
-              src="https://static.langimg.com/photo/imgsize-52268,msid-86087064/navbharat-times.jpg"
-              alt="user avatar"
-            />
-          </div>
+          <Link to="/CartPage">
+            <span> 🛒Cart</span>
+          </Link>
+          
+          {/* Avatar */}
+          <img
+            className="w-10 h-10 p-1 rounded-full"
+            src="https://static.langimg.com/photo/imgsize-52268,msid-86087064/navbharat-times.jpg"
+            alt="user avatar"
+          />
         </nav>
-        {/* Avtar */}
-
-        {/* Login Button */}
-        {/*         <button className=" md:block bg-blue-600 text-white px-3 py-1 rounded-lg">
-          Login
-        </button> */}
-
-        {/* Mobile Menu (hidden by default) */}
-        <div className="md:hidden">
-          {/* Add mobile menu toggle functionality here */}
-        </div>
-      </div>
+      
     </header>
   );
 };
