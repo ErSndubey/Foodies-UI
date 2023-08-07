@@ -46,7 +46,7 @@ const Header = () => {
           Foodies
         </span>
         <span className="text-gray-600 font-bold text-sm xl:text-4xl">
-          Foodies {userLocation && `- Location: ${userLocation}`}
+          {userLocation && ` ${userLocation}`}
         </span>
       </Link>
 
