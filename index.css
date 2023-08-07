@@ -14,9 +14,9 @@
     padding: 0px;
     border-radius: 3px;
     outline: none;
-    max-width: 70%; /* Adjust as needed */
-    max-height: 20vh; /* Adjust as needed */
-    overflow:hidden; /* Enable scrolling if content exceeds the modal height */
+    max-width: 90%; 
+    max-height: 30vh; 
+    overflow:hidden; 
     z-index: 1000; /* Ensure the modal appears above other content */
   }
   

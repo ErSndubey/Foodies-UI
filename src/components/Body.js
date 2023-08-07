@@ -61,8 +61,8 @@ const Body = () => {
           {errorMessage}.
         </div>
       )}
-<h3 className="font-bold  text-gray-600 mt-4 mx-2">🍽️ All Restaurant Nearby</h3>
-<h3 className="from-neutral-700 -mt-0.5 text-sm text-gray-600 mb-3 mx-2">Discover unique tastes near you</h3>
+<h3 className="font-bold lg:text-xl text-gray-600 mt-4 mx-2 xl:ml-4 ">🍽️ All Restaurant Nearby</h3>
+<h3 className="from-neutral-700 -mt-0.5 text-sm lg:text-lg xl:ml-4  text-gray-600 mb-3 mx-2">Discover unique tastes near you</h3>
       <div className="grid grid-cols-2  mr-1 ml-1 xl:ml-4  md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 ">
         
         {filteredRestaurants.map((restaurant) => {

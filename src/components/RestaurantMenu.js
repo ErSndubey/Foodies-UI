@@ -133,7 +133,7 @@ const RestaurantMenu = () => {
         overlayClassName="overlay"
         appElement={document.getElementById("root")}
       >
-        <div className="flex justify-center items-center p-0.5">
+        <div className="flex justify-center items-center p-0.5 ">
           <img
             src={selectedImage}
             alt="Popup Image"
