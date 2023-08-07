@@ -12,10 +12,7 @@ export const filterData = (searchText, restaurants) => {
 
 //getRestaurant function
 
-export const getRestaurants = async (
-  setRestaurants,
-  setFilteredRestaurants
-) => {
+export const getRestaurants = async (setRestaurants, setFilteredRestaurants) => {
   try {
     const data = await fetch(ResData_API_URL);
     if (!data.ok) {
@@ -23,22 +20,26 @@ export const getRestaurants = async (
     }
 
     const json = await data.json();
-    console.log(json);
+
+    // Detect if the user is accessing from a mobile device (including Android)
+    const isMobileDevice = window.innerWidth <= 768; // Adjust the width as needed for your design
+
+    // Choose the appropriate index based on the device type
+    const restaurantsIndex = isMobileDevice ? 3 : 2;
+
     setRestaurants(
-      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      json?.data?.cards[restaurantsIndex]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
     setFilteredRestaurants(
-      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      json?.data?.cards[restaurantsIndex]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
 
     return [setRestaurants, setFilteredRestaurants];
   } catch (error) {
-    console.error(
-      "An error occurred while fetching or processing data:",
-      error
-    );
+    console.error("An error occurred while fetching or processing data:", error);
   }
 };
+
 
 //handle search
 export const handleSearch = (setFilteredRestaurants,searchText,restaurants,setErrorMessage) => {
