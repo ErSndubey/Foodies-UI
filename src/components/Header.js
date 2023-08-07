@@ -8,11 +8,11 @@ const Header = () => {
   useEffect(() => {
     // Check if the geolocation API is available in the browser
     if ("geolocation" in navigator) {
-      // Get the user's current location
+      // Try to get the user's current location using geolocation
       navigator.geolocation.getCurrentPosition(
         async (position) => {
           const { latitude, longitude } = position.coords;
-          
+
           // Fetch city and country based on latitude and longitude
           try {
             const response = await fetch(
@@ -20,7 +20,9 @@ const Header = () => {
             );
             if (response.ok) {
               const data = await response.json();
-              setUserLocation(`${data.address.city}, ${data.address.country}`);
+              setUserLocation(
+                `${data.address.city}, ${data.address.country}`
+              );
             } else {
               throw new Error("Failed to fetch location data.");
             }
@@ -28,8 +30,23 @@ const Header = () => {
             console.error("Error fetching location:", error);
           }
         },
-        (error) => {
-          console.error("Error getting user location:", error);
+        async (geolocationError) => {
+          console.error("Error getting user location:", geolocationError);
+
+          // Fetch user's location based on IP address using ipstack
+          try {
+            const ipResponse = await fetch(
+              `http://api.ipstack.com/check?access_key=e69b3ce8dd77b679273ed1ddfbb88ee6`
+            );
+            if (ipResponse.ok) {
+              const ipData = await ipResponse.json();
+              setUserLocation(`${ipData.city}, ${ipData.region_name}`);
+            } else {
+              throw new Error("Failed to fetch IP location data.");
+            }
+          } catch (ipError) {
+            console.error("Error fetching IP location:", ipError);
+          }
         }
       );
     } else {
@@ -45,8 +62,8 @@ const Header = () => {
         <span className="text-red-600 font-bold text-2xl xl:text-4xl hidden sm:block">
           Foodies
         </span>
-        <span className="text-gray-600 font-semibold text-sm xl:text-base ml-2">
-          {userLocation && ` ${userLocation}`}
+        <span className="text-gray-600 font-bold text-sm xl:text-4xl ml-2">
+          {userLocation && `${userLocation}`}
         </span>
       </Link>
 
