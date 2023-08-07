@@ -66,7 +66,7 @@ const RestaurantMenu = () => {
                   className="w-80 h-24 max-w-[8rem]  xl:w-32 md:w-32 object-cover rounded-md border border-gray-100"
                 />
                 <button
-                  className=" w-20 px-1 xl:px-3 py-0.5 xl:py-1 border border-gray-400 bg-white text-xs text-green-600 font-bold rounded absolute bottom-0 left-1/2 transform -translate-x-1/2 -mb-3 hover:bg-green-500 hover:text-white hover:border-white"
+                  className=" w-20 px-1 xl:px-3 py-0.5 xl:py-1 border border-gray-400 bg-white text-xs text-green-600 font-bold rounded absolute bottom-0 left-1/2 transform -translate-x-1/2 -mb-3 hover:bg-green-600 hover:text-white hover:border-white"
                   onClick={() => addToCart(item)} // Use addToCart function from the custom hook
                 >
                   ADD +
