@@ -45,7 +45,7 @@ const Header = () => {
         <span className="text-red-600 font-bold text-2xl xl:text-4xl hidden sm:block">
           Foodies
         </span>
-        <span className="text-gray-600 font-bold text-sm xl:text-4xl">
+        <span className="text-gray-600 font-semibold text-sm xl:text-base ml-2">
           {userLocation && ` ${userLocation}`}
         </span>
       </Link>
