@@ -1,23 +1,29 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
-import Body from "./components/Body";
 import Footer from "./components/Footer";
+import Body from "./components/Body";
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import Error from "./components/Error";
 import Offers from "./components/Offers";
 import CartPage from "./components/CartPage.js";
-import Error from "./components/Error";
-import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import RestaurantMenu from "./components/RestaurantMenu";
 
 const AppLayout = () => {
   return (
     <>
       <Header />
+      
       <Outlet />
       <Footer />
     </>
   );
 };
+
+// Disable scroll restoration
+if ("scrollRestoration" in history) {
+  history.scrollRestoration = "manual";
+}
 
 const appRouter = createBrowserRouter([
   {
