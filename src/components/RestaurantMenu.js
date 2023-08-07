@@ -1,4 +1,5 @@
-
+import { useState } from "react";
+import Modal from "react-modal";
 import { useParams } from "react-router-dom";
 import useCart from "../Hooks/useCart";
 import useResMenuData from "../Hooks/useResMenuData";
@@ -14,7 +15,7 @@ import ShimmerMenu from "../Shimmer/ShimmerMenu";
 const RestaurantMenu = () => {
   const { resId } = useParams();
   const { cartItems, addToCart } = useCart();
- /*  const { addToCart } = useCart();  */// Using the addToCart function from the custom hook
+  const [selectedImage, setSelectedImage] = useState(null);
   const [restaurant, menuItems] = useResMenuData(
     ResMenu_Data_API_URL,
     resId,
@@ -22,14 +23,18 @@ const RestaurantMenu = () => {
     MENU_ITEM_TYPE_KEY
   );
 
- 
+  const openImageModal = (imageSrc) => {
+    setSelectedImage(imageSrc);
+  };
+
+  const closeImageModal = () => {
+    setSelectedImage(null);
+  };
 
   return !restaurant ? (
-    <ShimmerMenu/>
+    <ShimmerMenu />
   ) : (
-    <>
     <div className="container mx-auto mt-8">
-      {/* Restaurant Info container */}
       <div className="container flex justify-between m-4 border-b border-dashed border-gray-500 pb-4">
         <div className="text-gray-600">
           <h2 className="font-bold text-2xl ">{restaurant?.name}</h2>
@@ -48,7 +53,6 @@ const RestaurantMenu = () => {
         </div>
       </div>
 
-      {/* Menu Items container */}
       <div className="container mx-auto mt-8">
         <h2 className="text-2xl font-bold mb-4 mx-2 text-gray-600">
           Restaurant Menu ({menuItems.length})
@@ -63,7 +67,8 @@ const RestaurantMenu = () => {
                 <img
                   src={ITEM_IMG_CDN_URL + item?.imageId}
                   alt={item?.name}
-                  className="w-80 h-24 max-w-[8rem]  xl:w-32 md:w-32 object-cover rounded-md border border-gray-100"
+                  className="w-80 h-24 max-w-[8rem] xl:w-32 md:w-32 object-cover rounded-md border border-gray-100 cursor-pointer"
+                  onClick={() => openImageModal(ITEM_IMG_CDN_URL + item?.imageId)}
                 />
                 <button
                   className=" w-20 px-1 xl:px-3 py-0.5 xl:py-1 border border-gray-400 bg-white text-xs text-green-600 font-bold rounded absolute bottom-0 left-1/2 transform -translate-x-1/2 -mb-3 hover:bg-green-600 hover:text-white hover:border-white"
@@ -120,12 +125,24 @@ const RestaurantMenu = () => {
           ))}
         </div>
       </div>
+
+      <Modal
+        isOpen={selectedImage !== null}
+        onRequestClose={closeImageModal}
+        className="modal"
+        overlayClassName="overlay"
+        appElement={document.getElementById("root")}
+      >
+        <div className="flex justify-center items-center p-0.5">
+          <img
+            src={selectedImage}
+            alt="Popup Image"
+            className="max-w-full max-h-full"
+          />
+        </div>
+      </Modal>
     </div>
-
-
-    </>
   );
 };
 
 export default RestaurantMenu;
-

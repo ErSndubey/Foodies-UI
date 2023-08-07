@@ -1,3 +1,35 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* styles.css */
+
+/* Example Tailwind CSS styles for the modal and overlay */
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 0px;
+    border-radius: 3px;
+    outline: none;
+    max-width: 70%; /* Adjust as needed */
+    max-height: 20vh; /* Adjust as needed */
+    overflow:hidden; /* Enable scrolling if content exceeds the modal height */
+    z-index: 1000; /* Ensure the modal appears above other content */
+  }
+  
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999; /* Ensure the overlay is behind the modal */
+  }
+  
