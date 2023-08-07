@@ -1,3 +1,6 @@
+import LogoImage from "../Images/logo.png";
+import { Link } from "react-router-dom";
+
 const Header = () => {
   return (
     <header className="bg-white sticky top-0 z-50 drop-shadow-lg grid grid-cols-3 gap-4 items-center py-2 lg:py-4">
