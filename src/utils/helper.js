@@ -24,10 +24,12 @@ export const getRestaurants = async (
   if (deviceType === "desktop") {
     apiUrl = ResData_API_URL_DESKTOP;
   } else {
+    apiUrl=ResData_API_URL_MOBILE
     try {
       // Call the ResData_API_URL_MOBILE function to get the URL
       const mobileApiUrl = await ResData_API_URL_MOBILE();
       apiUrl = mobileApiUrl;
+      console.log(apiUrl);
     } catch (error) {
       console.error("Error getting mobile API URL:", error);
       return;
@@ -35,6 +37,7 @@ export const getRestaurants = async (
   }
 
   try {
+   /*  const data = await fetch(apiUrl); */
     const data = await fetch(apiUrl);
 
     if (!data.ok) {
@@ -61,8 +64,8 @@ export const getRestaurants = async (
       error
     );
   }
-};
 
+};
 
 //handle search
 export const handleSearch = (
