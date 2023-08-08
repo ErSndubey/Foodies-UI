@@ -6,6 +6,7 @@ import OffersIcon from "../Images/offers-icon.svg";
 import DiningIcon from "../Images/dining-icon.svg";
 import ProfileIcon from "../Images/profile-icon.svg";
 import CartIcon from "../Images/cart-icon.svg";
+import { ResData_API_URL_MOBILE } from "../config";
 
 const Header = () => {
   const [userLocation, setUserLocation] = useState(null);
@@ -13,13 +14,12 @@ const Header = () => {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    
-
     const handleScroll = () => {
       const currentScrollPos = window.scrollY;
 
       setVisible(
-        (prevVisible) => prevScrollPos > currentScrollPos || currentScrollPos < 10
+        (prevVisible) =>
+          prevScrollPos > currentScrollPos || currentScrollPos < 10
       );
 
       setPrevScrollPos(currentScrollPos);
@@ -45,26 +45,42 @@ const Header = () => {
           Foodies
         </span>
         <span className="text-gray-600 font-semibold text-sm xl:text-base ml-2">
-          {userLocation && ` ${userLocation}`}
+          {userLocation}
         </span>
       </Link>
 
       {/* Navigation Links */}
       <nav className="col-span-2 flex justify-end items-center gap-4 font-semibold text-gray-700 mr-1">
-          <Link to="/">
-          <img src={HomeIcon} alt="Cart" className="w-6 h-6 mr-2 hidden lg:block" />
+        <Link to="/">
+          <img
+            src={HomeIcon}
+            alt="Cart"
+            className="w-6 h-6 mr-2 hidden lg:block"
+          />
         </Link>
         <Link to="/Offers">
-          <img src={OffersIcon} alt="Cart" className="w-6 h-6 mr-2 hidden lg:block" />
+          <img
+            src={OffersIcon}
+            alt="Cart"
+            className="w-6 h-6 mr-2 hidden lg:block"
+          />
         </Link>
         <Link to="/Dining">
-          <img src={DiningIcon} alt="Cart" className="w-6 h-6 mr-2 hidden lg:block" />
+          <img
+            src={DiningIcon}
+            alt="Cart"
+            className="w-6 h-6 mr-2 hidden lg:block"
+          />
         </Link>
         <Link to="/CartPage">
           <img src={CartIcon} alt="Cart" className="w-6 h-6 mr-2" />
         </Link>
         <Link to="/Profile">
-          <img src={ProfileIcon} alt="Cart" className="w-6 h-6 mr-0 hidden lg:block border rounded-full border-gray-600" />
+          <img
+            src={ProfileIcon}
+            alt="Cart"
+            className="w-6 h-6 mr-0 hidden lg:block border rounded-full border-gray-600"
+          />
         </Link>
       </nav>
     </header>

@@ -1,27 +1,50 @@
 import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
-import { getRestaurants } from "../utils/helper";
 import ShimmerMain from "../Shimmer/ShimmerMain";
 import { handleSearch } from "../utils/helper";
 import { Link } from "react-router-dom";
 import SearchIcon from "../Images/search-icon.svg";
 import Cities from "./Cities";
+import { useResData } from "../Hooks/useResData";
 
 const Body = () => {
   const [searchText, setSearchText] = useState("");
   const [restaurants, setRestaurants] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
+  const [locationData, setLocationData] = useState({
+    district: null,
+    state: null,
+    country: null,
+  });
 
   useEffect(() => {
     // getRestaurant function call
-    getRestaurants(setRestaurants, setFilteredRestaurants);
+    useResData(setRestaurants, setFilteredRestaurants, setLocationData);
   }, []);
-
+  const userLocation = locationData;
   return restaurants?.length === 0 && filteredRestaurants?.length === 0 ? (
     <ShimmerMain />
   ) : (
     <>
+      {/* Location */}
+      <div className="flex flex-col ml-2 mt-1 ">
+        {/* Render location data */}
+        <div className="flex">
+        <svg className="mt-1" height="38" viewBox="0 0 48 48" width="28" xmlns="http://www.w3.org/2000/svg">
+        <path d="M24 4c-7.73 0-14 6.27-14 14 0 10.5 14 26 14 26s14-15.5 14-26c0-7.73-6.27-14-14-14zm0 19c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/>
+        <path d="M0 0h48v48h-48z" fill="none"/>
+    </svg>
+        <div className=" space-y-[-2px] text-sm text-gray-600 font-semibold">
+          <p >{locationData.district}</p>
+          <div className="flex">
+            <p>{locationData.state}</p>,
+            <p className="ml-1">{locationData.country}</p>
+          </div>
+        </div>
+        </div>
+
+      </div>
       {/* search Box */}
       <div className="max-w-screen-sm flex items-center justify-center mx-auto mt-3   px-3  ">
         <input
