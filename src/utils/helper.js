@@ -12,16 +12,31 @@ export const filterData = (searchText, restaurants) => {
 
 //getRestaurant function
 
+
+
 export const getRestaurants = async (
   setRestaurants,
   setFilteredRestaurants
 ) => {
   const deviceType = window.innerWidth >= 821 ? "desktop" : "mobile";
-  const apiUrl =
-    deviceType === "desktop" ? ResData_API_URL_DESKTOP : ResData_API_URL_MOBILE;
+  let apiUrl;
+
+  if (deviceType === "desktop") {
+    apiUrl = ResData_API_URL_DESKTOP;
+  } else {
+    try {
+      // Call the ResData_API_URL_MOBILE function to get the URL
+      const mobileApiUrl = await ResData_API_URL_MOBILE();
+      apiUrl = mobileApiUrl;
+    } catch (error) {
+      console.error("Error getting mobile API URL:", error);
+      return;
+    }
+  }
 
   try {
     const data = await fetch(apiUrl);
+
     if (!data.ok) {
       throw new Error("Network response was not ok.");
     }
@@ -47,6 +62,7 @@ export const getRestaurants = async (
     );
   }
 };
+
 
 //handle search
 export const handleSearch = (

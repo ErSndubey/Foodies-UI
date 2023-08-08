@@ -14,7 +14,7 @@ const Cities = ()=>{
             Discover unique tastes near you
           </h3>
         </div>
-        <div className=" flex items-center justify-center mt-3  top-14 xl:top-4   px-3 lg:ml-auto">
+{/*         <div className=" flex items-center justify-center mt-3  top-14 xl:top-4   px-3 lg:ml-auto">
           <select
             className=" p-1 bg-white text-sm text-gray-500 font-semibold border border-gray-400 rounded-lg focus:border-gray-100"
             value={selectedCity}
@@ -42,9 +42,9 @@ const Cities = ()=>{
             <option value="Bhubaneswar">Bhubaneswar</option>
             <option value="Coimbatore">Coimbatore</option>
 
-            {/* Add more cities as needed */}
+            
           </select>
-        </div>
+        </div> */}
       </div>
         </>
     )
