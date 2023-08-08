@@ -19,19 +19,15 @@ const Header = () => {
       navigator.geolocation.getCurrentPosition(
         async (position) => {
           const { latitude, longitude } = position.coords;
-  
-          // Fetch city, state, and country based on latitude and longitude
+
+          // Fetch city and country based on latitude and longitude
           try {
             const response = await fetch(
               `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`
             );
             if (response.ok) {
               const data = await response.json();
-              const city = data.address.city || "";
-              const state = data.address.state || "";
-              const country = data.address.country || "";
-              setUserLocation(`${city}, ${state}, ${country}`);
-              return { city, state, country };
+              setUserLocation(`${data.address.city},  ${data.address.country}`);
             } else {
               throw new Error("Failed to fetch location data.");
             }
@@ -45,8 +41,7 @@ const Header = () => {
       );
     } else {
       console.error("Geolocation is not available in this browser.");
-    };
-   
+    }
 
     const handleScroll = () => {
       const currentScrollPos = window.scrollY;

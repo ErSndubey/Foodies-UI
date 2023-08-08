@@ -1,8 +1,4 @@
-import {
-  
-  ResData_API_URL_DESKTOP,
-  ResData_API_URL_MOBILE,
-} from "../config";
+import { ResData_API_URL_DESKTOP, ResData_API_URL_MOBILE } from "../config";
 
 //Filter function
 export const filterData = (searchText, restaurants) => {
@@ -37,7 +33,8 @@ export const getRestaurants = async (
       deviceType === "desktop"
         ? json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
             ?.restaurants
-        : json.data.success.cards[1].gridWidget.gridElements.infoWithStyle.restaurants;
+        : json.data.success.cards[1].gridWidget.gridElements.infoWithStyle
+            .restaurants;
     console.log(restaurants);
     setRestaurants(restaurants);
     setFilteredRestaurants(restaurants);
@@ -69,3 +66,9 @@ export const handleSearch = (
 };
 
 //cart quantity control buttons
+
+/* mumbai */
+("https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.0759837&lng=72.8776559&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
+
+/* Banglore */
+("https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
