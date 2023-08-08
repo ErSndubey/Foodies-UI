@@ -23,7 +23,7 @@ const Body = () => {
   ) : (
     <>
       {/* search Box */}
-      <div className="max-w-screen-sm flex items-center justify-center mx-auto mt-3 sticky top-4   px-3  ">
+      <div className="max-w-screen-sm flex items-center justify-center mx-auto mt-3   px-3  ">
         <input
           type="text"
           className="w-full p-2 bg-white text-sm text-gray-500 font-semibold border border-gray-400 rounded-lg focus:border-gray-100 "
