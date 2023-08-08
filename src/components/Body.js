@@ -5,7 +5,7 @@ import ShimmerMain from "../Shimmer/ShimmerMain";
 import { handleSearch } from "../utils/helper";
 import { Link } from "react-router-dom";
 import SearchIcon from "../Images/search-icon.svg";
-import Cities from "./cities";
+import Cities from "./Cities";
 
 const Body = () => {
   const [searchText, setSearchText] = useState("");
