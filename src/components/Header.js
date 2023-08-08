@@ -27,7 +27,7 @@ const Header = () => {
             );
             if (response.ok) {
               const data = await response.json();
-              setUserLocation(`${data.address.city}, ${data.address.country}`);
+              setUserLocation(`${data.address.city}, ${data.address.state}, ${data.address.country}`);
             } else {
               throw new Error("Failed to fetch location data.");
             }
