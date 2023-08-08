@@ -5,12 +5,12 @@ const Cities = ()=>{
     return(
         <>
               {/* city dropdown */}
-      <div className="flex lg:flex-row justify-between items-between  mx-auto mt-3 px-3 ">
+      <div className="flex lg:flex-row justify-between items-between  mt-3 px-3 ">
         <div className="lg:flex lg:flex-col">
-          <h3 className="font-bold lg:text-xl text-gray-600 mt-4 mx-2 xl:ml-4 ">
+          <h3 className="font-bold lg:text-xl text-gray-600 mt-4 ml-1 xl:ml-4 ">
             🍽️ All Restaurant Nearby
           </h3>
-          <h3 className="from-neutral-700 -mt-0.5 text-sm lg:text-lg xl:ml-4  text-gray-600 mb-3 mx-2">
+          <h3 className="from-neutral-700 -mt-0.5 text-sm lg:text-lg xl:ml-4  text-gray-600 mb-3 mx-1">
             Discover unique tastes near you
           </h3>
         </div>
@@ -20,7 +20,7 @@ const Cities = ()=>{
             value={selectedCity}
             onChange={(e) => setSelectedCity(e.target.value)}
           >
-            <option value="All Cities">All Cities</option>
+            <option value="All Cities">Cities</option>
             <option value="Mumbai">Mumbai</option>
             <option value="Bangalore">Bangalore</option>
             <option value="Delhi">Delhi</option>

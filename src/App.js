@@ -13,7 +13,7 @@ import Dining from "./components/Dining";
 import Profile from "./components/Profile";
 
 const AppLayout = () => {
-  const isMobileOrTablet = window.matchMedia("(max-width: 768px)").matches;
+  const isMobileOrTablet = window.matchMedia("(max-width: 821px)").matches;
   return (
     <>
       <Header />

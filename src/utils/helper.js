@@ -1,5 +1,5 @@
 import {
-  ResData_API_URL,
+  
   ResData_API_URL_DESKTOP,
   ResData_API_URL_MOBILE,
 } from "../config";
@@ -20,7 +20,7 @@ export const getRestaurants = async (
   setRestaurants,
   setFilteredRestaurants
 ) => {
-  const deviceType = window.innerWidth >= 768 ? "desktop" : "mobile";
+  const deviceType = window.innerWidth >= 821 ? "desktop" : "mobile";
   const apiUrl =
     deviceType === "desktop" ? ResData_API_URL_DESKTOP : ResData_API_URL_MOBILE;
 

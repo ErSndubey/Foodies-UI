@@ -58,19 +58,19 @@ const Header = () => {
       {/* Navigation Links */}
       <nav className="col-span-2 flex justify-end items-center gap-4 font-semibold text-gray-700 mr-1">
         <Link to="/">
-          <img src={HomeIcon} alt="Cart" className="w-6 h-6 mr-2 hidden md:block" />
+          <img src={HomeIcon} alt="Cart" className="w-6 h-6 mr-2 hidden lg:block" />
         </Link>
         <Link to="/Offers">
-          <img src={OffersIcon} alt="Cart" className="w-6 h-6 mr-2 hidden md:block" />
+          <img src={OffersIcon} alt="Cart" className="w-6 h-6 mr-2 hidden lg:block" />
         </Link>
         <Link to="/Dining">
-          <img src={DiningIcon} alt="Cart" className="w-6 h-6 mr-2 hidden md:block" />
+          <img src={DiningIcon} alt="Cart" className="w-6 h-6 mr-2 hidden lg:block" />
         </Link>
         <Link to="/CartPage">
           <img src={CartIcon} alt="Cart" className="w-6 h-6 mr-2" />
         </Link>
         <Link to="/Profile">
-          <img src={ProfileIcon} alt="Cart" className="w-6 h-6 mr-0 hidden md:block border rounded-full border-gray-600" />
+          <img src={ProfileIcon} alt="Cart" className="w-6 h-6 mr-0 hidden lg:block border rounded-full border-gray-600" />
         </Link>
 
         {/* Avatar */}
