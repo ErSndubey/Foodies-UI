@@ -4,6 +4,9 @@ export const IMG_CDN_URL =
 export const ResData_API_URL_DESKTOP =
   "https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING";
 
+
+ export const BING_MAPS_API_KEY='AiByuWBZ4x5S251J2juqm8pDyd38lMRbDHmGUjHzyHm-e0t19MxCcKD-TF_5OPtL';
+
 // Construct the API URL using the user's city latitude and longitude
 export const ResData_API_URL_MOBILE = async () => {
   try {
@@ -12,21 +15,44 @@ export const ResData_API_URL_MOBILE = async () => {
         navigator.geolocation.getCurrentPosition(resolve, reject);
       });
 
-      // Fetch city details based on user's latitude and longitude
-      const response = await fetch(
-        `https://nominatim.openstreetmap.org/reverse?lat=${position.coords.latitude}&lon=${position.coords.longitude}&format=json`
-      );
+      const apiKey = 'AiByuWBZ4x5S251J2juqm8pDyd38lMRbDHmGUjHzyHm-e0t19MxCcKD-TF_5OPtL'; // Replace with your Bing Maps API key
+
+      // Construct the URL to reverse geocode the user's location
+      const reverseGeocodeUrl = `https://dev.virtualearth.net/REST/v1/Locations/${position.coords.latitude},${position.coords.longitude}?key=${apiKey}`;
+
+      // Fetch district details based on user's latitude and longitude using Bing Maps API
+      const response = await fetch(reverseGeocodeUrl);
 
       if (response.ok) {
         const data = await response.json();
-        const cityLatitude = data.lat;
-        const cityLongitude = data.lon;
 
-        // Construct the API URL with city's latitude and longitude
-        return `https://corsproxy.io/?https://www.swiggy.com/mapi/homepage/getCards?lat=${cityLatitude}&lng=${cityLongitude}`;
-      } else {
-        throw new Error("Failed to fetch city details.");
+        // Extract district information from Bing Maps response
+        const address = data.resourceSets[0]?.resources[0]?.address;
+        const district = address.district;
+
+        // Construct the URL to reverse geocode the district's location
+        const districtReverseGeocodeUrl = `https://dev.virtualearth.net/REST/v1/Locations?q=${encodeURIComponent(district)}&key=${apiKey}`;
+
+        // Fetch district's latitude and longitude using Bing Maps API
+        const districtResponse = await fetch(districtReverseGeocodeUrl);
+        if (districtResponse.ok) {
+          const districtData = await districtResponse.json();
+
+          // Extract district's latitude and longitude
+          const districtLocation = districtData.resourceSets[0]?.resources[0]?.point?.coordinates;
+
+          if (districtLocation) {
+            const [districtLongitude, districtLatitude] = districtLocation;
+
+            // Construct the API URL with district's latitude and longitude
+            const apiUrl = `https://corsproxy.io/?https://www.swiggy.com/mapi/homepage/getCards?lat=${districtLatitude}&lng=${districtLongitude}`;
+
+            return apiUrl;
+          }
+        }
       }
+
+      throw new Error("Failed to fetch district details.");
     } else {
       console.error("Geolocation is not available in this browser.");
       return null;
@@ -36,6 +62,9 @@ export const ResData_API_URL_MOBILE = async () => {
     return null;
   }
 };
+
+
+
 
 /*   export const ResData_API_URL_MOBILE =
   "https://corsproxy.io/?https://www.swiggy.com/mapi/homepage/getCards?lat=25.473034&lng=81.878357"; */

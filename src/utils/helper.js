@@ -1,4 +1,4 @@
-import { ResData_API_URL_DESKTOP, ResData_API_URL_MOBILE } from "../config";
+import { ResData_API_URL_DESKTOP, ResData_API_URL_MOBILE,BING_MAPS_API_KEY } from "../config";
 
 //Filter function
 export const filterData = (searchText, restaurants) => {
@@ -48,8 +48,8 @@ export const getRestaurants = async (
       deviceType === "desktop"
         ? json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
             ?.restaurants
-        : json.data.success.cards[1].gridWidget.gridElements.infoWithStyle
-            .restaurants;
+        : json?.data?.success?.cards[1]?.gridWidget?.gridElements?.infoWithStyle
+            ?.restaurants;
     console.log(restaurants);
     setRestaurants(restaurants);
     setFilteredRestaurants(restaurants);
