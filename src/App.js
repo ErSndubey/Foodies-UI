@@ -8,22 +8,22 @@ import Error from "./components/Error";
 import Offers from "./components/Offers";
 import CartPage from "./components/CartPage.js";
 import RestaurantMenu from "./components/RestaurantMenu";
+import BottomNav from "./components/BottomNav";
+import Dining from "./components/Dining";
+import Profile from "./components/Profile";
 
 const AppLayout = () => {
+  const isMobileOrTablet = window.matchMedia("(max-width: 768px)").matches;
   return (
     <>
       <Header />
-      
+
       <Outlet />
       <Footer />
+      {isMobileOrTablet && <BottomNav />}
     </>
   );
 };
-
-// Disable scroll restoration
-if ("scrollRestoration" in history) {
-  history.scrollRestoration = "manual";
-}
 
 const appRouter = createBrowserRouter([
   {
@@ -36,7 +36,7 @@ const appRouter = createBrowserRouter([
         element: <Body />,
       },
       {
-        path: "/offers",
+        path: "/Offers",
         element: <Offers />,
       },
       {
@@ -44,10 +44,17 @@ const appRouter = createBrowserRouter([
         element: <CartPage />,
       },
       {
+        path: "/Dining",
+        element: <Dining />,
+      },
+      {
+        path: "/Profile",
+        element: <Profile />,
+      },
+      {
         path: "/restaurant/:resId",
         element: <RestaurantMenu />,
       },
-  
     ],
   },
 ]);

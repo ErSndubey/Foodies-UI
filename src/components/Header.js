@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 import LogoImage from "../Images/logo.png";
 import { Link } from "react-router-dom";
+import HomeIcon from "../Images/home-icon.svg";
+import OffersIcon from "../Images/offers-icon.svg";
+import DiningIcon from "../Images/dining-icon.svg";
+import ProfileIcon from "../Images/profile-icon.svg";
+import CartIcon from "../Images/cart-icon.svg";
 
 const Header = () => {
   const [userLocation, setUserLocation] = useState(null);
@@ -12,7 +17,7 @@ const Header = () => {
       navigator.geolocation.getCurrentPosition(
         async (position) => {
           const { latitude, longitude } = position.coords;
-          
+
           // Fetch city and country based on latitude and longitude
           try {
             const response = await fetch(
@@ -42,7 +47,7 @@ const Header = () => {
       {/* Logo */}
       <Link to={"/"} className="col-span-1 ml-2 flex items-center">
         <img src={LogoImage} alt="Logo" className="h-10 w-auto mr-2" />
-        <span className="text-red-600 font-bold text-2xl xl:text-4xl hidden sm:block">
+        <span className="text-red-600 font-bold text-2xl xl:text-4xl ">
           Foodies
         </span>
         <span className="text-gray-600 font-semibold text-sm xl:text-base ml-2">
@@ -52,20 +57,29 @@ const Header = () => {
 
       {/* Navigation Links */}
       <nav className="col-span-2 flex justify-end items-center gap-4 font-semibold text-gray-700 mr-1">
-        <Link to="/Offers">
-          <span>🏷️Offers</span>
+        <Link to="/">
+          <img src={HomeIcon} alt="Cart" className="w-6 h-6 mr-2 hidden md:block" />
         </Link>
-
+        <Link to="/Offers">
+          <img src={OffersIcon} alt="Cart" className="w-6 h-6 mr-2 hidden md:block" />
+        </Link>
+        <Link to="/Dining">
+          <img src={DiningIcon} alt="Cart" className="w-6 h-6 mr-2 hidden md:block" />
+        </Link>
         <Link to="/CartPage">
-          <span> 🛒Cart</span>
+          <img src={CartIcon} alt="Cart" className="w-6 h-6 mr-2" />
+        </Link>
+        <Link to="/Profile">
+          <img src={ProfileIcon} alt="Cart" className="w-6 h-6 mr-0 hidden md:block border rounded-full border-gray-600" />
         </Link>
 
         {/* Avatar */}
-        <img
+
+        {/* <img
           className="w-10 h-10 p-1 rounded-full"
-          src="https://static.langimg.com/photo/imgsize-52268,msid-86087064/navbharat-times.jpg"
+          src="https://via.placeholder.com/150"
           alt="user avatar"
-        />
+        /> */}
       </nav>
     </header>
   );
