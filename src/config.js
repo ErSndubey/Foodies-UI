@@ -3,27 +3,41 @@ export const IMG_CDN_URL ="https://res.cloudinary.com/swiggy/image/upload/fl_los
 export const ResData_API_URL_DESKTOP =
   "https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING";
 
-  // Construct the API URL using template literals
+// Construct the API URL using the user's city latitude and longitude
 export const ResData_API_URL_MOBILE = async () => {
   try {
-    // Get the user's current location
-    const position = await new Promise((resolve, reject) => {
-      navigator.geolocation.getCurrentPosition(resolve, reject);
-    });
+    if ("geolocation" in navigator) {
+      const position = await new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject);
+      });
 
-    // Extract latitude and longitude from the position object
-    const latitude = position.coords.latitude;
-    const longitude = position.coords.longitude;
+      // Fetch city details based on user's latitude and longitude
+      const response = await fetch(
+        `https://nominatim.openstreetmap.org/reverse?lat=${position.coords.latitude}&lon=${position.coords.longitude}&format=json`
+      );
 
-    // Construct the API URL with dynamic latitude and longitude
-    return `https://corsproxy.io/?https://www.swiggy.com/mapi/homepage/getCards?lat=${latitude}&lng=${longitude}`;
+      if (response.ok) {
+        const data = await response.json();
+        const cityLatitude = data.lat;
+        const cityLongitude = data.lon;
+
+        // Construct the API URL with city's latitude and longitude
+        return `https://corsproxy.io/?https://www.swiggy.com/mapi/homepage/getCards?lat=${cityLatitude}&lng=${cityLongitude}`;
+      } else {
+        throw new Error("Failed to fetch city details.");
+      }
+    } else {
+      console.error("Geolocation is not available in this browser.");
+      return null;
+    }
   } catch (error) {
-    console.error("Error fetching user's location:", error);
+    console.error("Error fetching data:", error);
     return null;
   }
 };
+
 /*   export const ResData_API_URL_MOBILE =
-  "https://corsproxy.io/?https://www.swiggy.com/mapi/homepage/getCards?lat=19.0759837&lng=72.8776559"; */
+  "https://corsproxy.io/?https://www.swiggy.com/mapi/homepage/getCards?lat=25.473034&lng=81.878357"; */
 
   export const ITEM_IMG_CDN_URL =
   "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_208,h_208,c_fit/"; 
