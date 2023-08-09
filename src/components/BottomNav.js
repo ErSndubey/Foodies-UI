@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import HomeIcon from "../Images/home-icon.svg";
 import OffersIcon from "../Images/offers-icon.svg";
 import DiningIcon from "../Images/dining-icon.svg";
-import ProfileIcon from "../Images/profile-icon.svg";
+import CartIcon from "../Images/cart-icon.svg";
 
 const BottomNavigation = () => {
   return (
@@ -22,7 +22,7 @@ const BottomNavigation = () => {
         <span className="text-sm"></span>
       </Link>
       <Link to="/profile" className="text-center">
-        <img src={ProfileIcon} alt="Profile" className="w-6 h-6 border rounded-full border-gray-600" />
+        <img src={CartIcon} alt="Profile" className="w-6 h-6 " />
         <span className="text-sm"></span>
       </Link>
     </nav>

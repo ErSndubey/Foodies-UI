@@ -35,13 +35,16 @@ export const fetchUserLocationData = async () => {
         const longitude = position.coords.longitude;
 
         // Construct the API URL with district, latitude, and longitude
-        const apiUrl = `https://www.swiggy.com/mapi/homepage/getCards?lat=${latitude}&lng=${longitude}&district=${district}`;
+        const apiUrl_Mobile = `https://www.swiggy.com/mapi/homepage/getCards?lat=${latitude}&lng=${longitude}&district=${district}`;
+        const apiUrl_Desktop = `https://www.swiggy.com/dapi/restaurants/list/v5?lat=${latitude}&lng=${longitude}&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING`
 
         // Construct the final response URL with corsproxy.io prefix
-        const corsProxyUrl = `https://corsproxy.io/?${apiUrl}`;
+        const corsProxyUrl_Mobile = `https://corsproxy.io/?${apiUrl_Mobile}`;
+        const corsProxyUrl_Desktop = `https://corsproxy.io/?${apiUrl_Desktop}`;
 
         return {
-          corsProxyUrl,
+          corsProxyUrl_Mobile,
+          corsProxyUrl_Desktop,
           district,
           state,
           country,
@@ -51,13 +54,19 @@ export const fetchUserLocationData = async () => {
       }
     } else {
       console.error("Geolocation is not available in this browser.");
-      return null;
+      const enableLocation = window.confirm("Please enable location services to use our app. Do you want to enable it now?");
+      if (enableLocation) {
+        // Redirect the user to the device's location settings
+        window.location.href = "settings:apps"; // This might work on some devices
+      }
+      return { locationDenied: true };
     }
   } catch (error) {
     console.error("Error fetching data:", error);
-    return null;
+    return { locationError: true };
   }
 };
+
 
 
 /*   export const ResData_API_URL_MOBILE =

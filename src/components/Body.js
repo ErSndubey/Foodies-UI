@@ -4,7 +4,7 @@ import ShimmerMain from "../Shimmer/ShimmerMain";
 import { handleSearch } from "../utils/helper";
 import { Link } from "react-router-dom";
 import SearchIcon from "../Images/search-icon.svg";
-import Cities from "./Cities";
+import LocationIocn from "../Images/location-icon.svg";
 import { useResData } from "../Hooks/useResData";
 
 const Body = () => {
@@ -27,24 +27,6 @@ const Body = () => {
     <ShimmerMain />
   ) : (
     <>
-      {/* Location */}
-      <div className="flex flex-col ml-2 mt-1 ">
-        {/* Render location data */}
-        <div className="flex">
-        <svg className="mt-1" height="38" viewBox="0 0 48 48" width="28" xmlns="http://www.w3.org/2000/svg">
-        <path d="M24 4c-7.73 0-14 6.27-14 14 0 10.5 14 26 14 26s14-15.5 14-26c0-7.73-6.27-14-14-14zm0 19c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/>
-        <path d="M0 0h48v48h-48z" fill="none"/>
-    </svg>
-        <div className=" space-y-[-2px] text-sm text-gray-600 font-semibold">
-          <p >{locationData.district}</p>
-          <div className="flex">
-            <p>{locationData.state}</p>,
-            <p className="ml-1">{locationData.country}</p>
-          </div>
-        </div>
-        </div>
-
-      </div>
       {/* search Box */}
       <div className="max-w-screen-sm flex items-center justify-center mx-auto mt-3   px-3  ">
         <input
@@ -85,8 +67,35 @@ const Body = () => {
           {errorMessage}.
         </div>
       )}
-      {/* cities dropdown */}
-      <Cities />
+      {/* city dropdown */}
+      <div className="flex lg:flex-row justify-between items-between  mt-3 px-3 ">
+        <div className="lg:flex lg:flex-col">
+          <h3 className="font-bold lg:text-xl text-gray-600 mt-4 ml-1 xl:ml-4 ">
+            🍽️ All Restaurant Nearby
+          </h3>
+          <h3 className="from-neutral-700 -mt-0.5 text-sm lg:text-lg xl:ml-4  text-gray-600 mb-3 mx-1">
+            Discover unique tastes near you
+          </h3>
+        </div>
+        {/* Location */}
+        <div className="flex flex-col ml-2 mt-6 mx-4 ">
+          {/* Render location data */}
+          <div className="flex">
+            <img
+              src={LocationIocn}
+              alt="user-location"
+              className="w-5 mx-2 mt-1"
+            />
+            <div className=" space-y-[-2px] text-sm text-gray-600 font-semibold">
+              <p>{locationData.district}</p>
+              <div className="flex">
+                <p>{locationData.state}</p>,
+                <p className="ml-1">{locationData.country}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       {/* BODY */}
       <div className="grid grid-cols-2  mr-1 ml-1 xl:ml-4  md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 ">
         {filteredRestaurants.map((restaurant) => {

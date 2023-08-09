@@ -5,13 +5,20 @@ export const useResData = async (setRestaurants, setFilteredRestaurants ,setUser
   let apiUrl;
 
   if (deviceType === "desktop") {
-    apiUrl = ResData_API_URL_DESKTOP;
+    
+    const data = await fetchUserLocationData();
+    apiUrl = data.corsProxyUrl_Desktop;
+    setUserLocation({
+      district: data.district,
+      state: data.state,
+      country: data.country,
+    });
   } else {
-    apiUrl = fetchUserLocationData;
+    
     try {
       // Call the ResData_API_URL_MOBILE function to get the URL
       const data = await fetchUserLocationData();
-      apiUrl = data.corsProxyUrl;
+      apiUrl = data.corsProxyUrl_Mobile;
       setUserLocation({
         district: data.district,
         state: data.state,
@@ -22,6 +29,8 @@ export const useResData = async (setRestaurants, setFilteredRestaurants ,setUser
       return;
     }
   }
+
+ 
 
   try {
     /*  const data = await fetch(apiUrl); */

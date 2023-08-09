@@ -6,7 +6,7 @@ import OffersIcon from "../Images/offers-icon.svg";
 import DiningIcon from "../Images/dining-icon.svg";
 import ProfileIcon from "../Images/profile-icon.svg";
 import CartIcon from "../Images/cart-icon.svg";
-import { ResData_API_URL_MOBILE } from "../config";
+
 
 const Header = () => {
   const [userLocation, setUserLocation] = useState(null);
@@ -58,6 +58,7 @@ const Header = () => {
             className="w-6 h-6 mr-2 hidden lg:block"
           />
         </Link>
+        
         <Link to="/Offers">
           <img
             src={OffersIcon}
@@ -73,13 +74,13 @@ const Header = () => {
           />
         </Link>
         <Link to="/CartPage">
-          <img src={CartIcon} alt="Cart" className="w-6 h-6 mr-2" />
+          <img src={CartIcon} alt="Cart" className="w-6 h-6 mr-2 hidden lg:block" />
         </Link>
         <Link to="/Profile">
           <img
             src={ProfileIcon}
             alt="Cart"
-            className="w-6 h-6 mr-0 hidden lg:block border rounded-full border-gray-600"
+            className="w-6 h-6 mr-3 ml-7  border rounded-full border-gray-600"
           />
         </Link>
       </nav>
