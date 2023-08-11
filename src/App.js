@@ -11,6 +11,7 @@ import RestaurantMenu from "./components/RestaurantMenu";
 import BottomNav from "./components/BottomNav";
 import Dining from "./components/Dining";
 import Profile from "./components/Profile";
+import SearchAnyThing from "./components/SearchAnything";
 
 const AppLayout = () => {
   const isMobileOrTablet = window.matchMedia("(max-width: 821px)").matches;
@@ -34,6 +35,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/",
         element: <Body />,
+      },
+      {
+        path: "/search",
+        element: <SearchAnyThing />,
       },
       {
         path: "/Offers",

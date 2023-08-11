@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import LogoImage from "../Images/logo.png";
 import { Link } from "react-router-dom";
-import HomeIcon from "../Images/home-icon.svg";
+import SearchIcon from "../Images/search-icon.svg";
 import OffersIcon from "../Images/offers-icon.svg";
 import DiningIcon from "../Images/dining-icon.svg";
 import ProfileIcon from "../Images/profile-icon.svg";
 import CartIcon from "../Images/cart-icon.svg";
-
+import SearchLocation from "./SearchLocation";
+import SearchAnything from "./SearchAnything";
 
 const Header = () => {
   const [userLocation, setUserLocation] = useState(null);
@@ -49,16 +50,19 @@ const Header = () => {
         </span>
       </Link>
 
+      {/* <SearchLocation/> */}
+    
+     
       {/* Navigation Links */}
       <nav className="col-span-2 flex justify-end items-center gap-4 font-semibold text-gray-700 mr-1">
-        <Link to="/">
+        <Link to="/search">
           <img
-            src={HomeIcon}
+            src={SearchIcon}
             alt="Cart"
             className="w-6 h-6 mr-2 hidden lg:block"
           />
         </Link>
-        
+
         <Link to="/Offers">
           <img
             src={OffersIcon}
@@ -74,7 +78,11 @@ const Header = () => {
           />
         </Link>
         <Link to="/CartPage">
-          <img src={CartIcon} alt="Cart" className="w-6 h-6 mr-2 hidden lg:block" />
+          <img
+            src={CartIcon}
+            alt="Cart"
+            className="w-6 h-6 mr-2 hidden lg:block"
+          />
         </Link>
         <Link to="/Profile">
           <img

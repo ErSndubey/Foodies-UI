@@ -5,6 +5,7 @@ import HomeIcon from "../Images/home-icon.svg";
 import OffersIcon from "../Images/offers-icon.svg";
 import DiningIcon from "../Images/dining-icon.svg";
 import CartIcon from "../Images/cart-icon.svg";
+import SearchIcon from "../Images/search-icon.svg";
 
 const BottomNavigation = () => {
   return (
@@ -13,14 +14,18 @@ const BottomNavigation = () => {
         <img src={HomeIcon} alt="Home" className="w-6 h-6 fill-current " />
         <span className="text-sm"></span>
       </Link>
+      <Link to="/search" className="text-center">
+        <img src={SearchIcon} alt="Offers" className="w-6 h-6" />
+        <span className="text-sm"></span>
+      </Link>
       <Link to="/offers" className="text-center">
         <img src={OffersIcon} alt="Offers" className="w-6 h-6" />
         <span className="text-sm"></span>
       </Link>
-      <Link to="/dining" className="text-center">
+{/*       <Link to="/dining" className="text-center">
         <img src={DiningIcon} alt="Dining" className="w-6 h-6" />
         <span className="text-sm"></span>
-      </Link>
+      </Link> */}
       <Link to="/profile" className="text-center">
         <img src={CartIcon} alt="Profile" className="w-6 h-6 " />
         <span className="text-sm"></span>

@@ -1,9 +1,9 @@
 import { ResData_API_URL_DESKTOP, fetchUserLocationData } from "../config";
 
 export const useResData = async (setRestaurants, setFilteredRestaurants ,setUserLocation) => {
-  const deviceType = window.innerWidth >= 821 ? "desktop" : "mobile";
+  const deviceType = window.innerWidth >= 852 ? "desktop" : "mobile";
   let apiUrl;
-
+console.log(deviceType);
   if (deviceType === "desktop") {
     
     const data = await fetchUserLocationData();
@@ -15,6 +15,8 @@ export const useResData = async (setRestaurants, setFilteredRestaurants ,setUser
     });
   } else {
     
+  
+   
     try {
       // Call the ResData_API_URL_MOBILE function to get the URL
       const data = await fetchUserLocationData();
@@ -50,7 +52,7 @@ export const useResData = async (setRestaurants, setFilteredRestaurants ,setUser
         : json?.data?.success?.cards[1]?.gridWidget?.gridElements?.infoWithStyle
             ?.restaurants;
             
-    console.log(restaurants);
+  
     setRestaurants(restaurants);
     setFilteredRestaurants(restaurants);
 

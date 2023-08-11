@@ -1,13 +1,14 @@
-export const IMG_CDN_URL =
-  "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/";
+import axios from "axios";
 
-export const ResData_API_URL_DESKTOP =
-  "https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING";
+export const IMG_CDN_URL = "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/";
+export const ResData_API_URL_DESKTOP = "https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING";
+export const BING_MAPS_API_KEY = "AiByuWBZ4x5S251J2juqm8pDyd38lMRbDHmGUjHzyHm-e0t19MxCcKD-TF_5OPtL";
+export const ITEM_IMG_CDN_URL = "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_208,h_208,c_fit/";
+export const ResMenu_Data_API_URL = "https://corsproxy.io/?https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=25.4358011&lng=81.846311&restaurantId=";
+export const MENU_ITEM_TYPE_KEY = "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory";
+export const RESTAURANT_TYPE_KEY = "type.googleapis.com/swiggy.presentation.food.v2.Restaurant";
+export const infoWithStyle_Type_key = "type.googleapis.com/swiggy.presentation.food.v2.FavouriteRestaurantInfoWithStyle";
 
-export const BING_MAPS_API_KEY =
-  "AiByuWBZ4x5S251J2juqm8pDyd38lMRbDHmGUjHzyHm-e0t19MxCcKD-TF_5OPtL";
-
-// Construct the API URL using the user's city latitude and longitude
 export const fetchUserLocationData = async () => {
   try {
     if ("geolocation" in navigator) {
@@ -15,39 +16,36 @@ export const fetchUserLocationData = async () => {
         navigator.geolocation.getCurrentPosition(resolve, reject);
       });
 
-      const apiKey = "AiByuWBZ4x5S251J2juqm8pDyd38lMRbDHmGUjHzyHm-e0t19MxCcKD-TF_5OPtL"; // Replace with your Bing Maps API key
+      const apiKey = "AiByuWBZ4x5S251J2juqm8pDyd38lMRbDHmGUjHzyHm-e0t19MxCcKD-TF_5OPtL";
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
 
-      // Construct the URL to reverse geocode the user's location
-      const reverseGeocodeUrl = `https://dev.virtualearth.net/REST/v1/Locations/${position.coords.latitude},${position.coords.longitude}?key=${apiKey}`;
+      const reverseGeocodeUrl = `https://dev.virtualearth.net/REST/v1/Locations/${latitude},${longitude}?key=${apiKey}`;
+      const response = await axios.get(reverseGeocodeUrl);
 
-      // Fetch city details based on user's latitude and longitude using Bing Maps API
-      const response = await fetch(reverseGeocodeUrl);
-
-      if (response.ok) {
-        const data = await response.json();
+      if (response.status === 200) {
+        const data = response.data;
         console.log(data);
-        // Extract district, latitude, and longitude from Bing Maps response
         const address = data.resourceSets[0]?.resources[0]?.address;
         const district = address.adminDistrict2;
         const state = address.adminDistrict;
         const country = address.countryRegion;
-        const latitude = position.coords.latitude;
-        const longitude = position.coords.longitude;
 
-        // Construct the API URL with district, latitude, and longitude
-        const apiUrl_Mobile = `https://www.swiggy.com/mapi/homepage/getCards?lat=${latitude}&lng=${longitude}&district=${district}`;
-        const apiUrl_Desktop = `https://www.swiggy.com/dapi/restaurants/list/v5?lat=${latitude}&lng=${longitude}&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING`
-
-        // Construct the final response URL with corsproxy.io prefix
+        const apiUrl_Mobile = `https://www.swiggy.com/mapi/homepage/getCards?lat=${latitude}&lng=${longitude}`;
+        const apiUrl_Desktop = `https://www.swiggy.com/dapi/restaurants/list/v5?lat=${latitude}&lng=${longitude}`;
         const corsProxyUrl_Mobile = `https://corsproxy.io/?${apiUrl_Mobile}`;
         const corsProxyUrl_Desktop = `https://corsproxy.io/?${apiUrl_Desktop}`;
 
         return {
           corsProxyUrl_Mobile,
           corsProxyUrl_Desktop,
+  /*         apiUrl_Mobile,
+          apiUrl_Desktop, */
           district,
           state,
           country,
+          latitude,
+          longitude
         };
       } else {
         throw new Error("Failed to fetch city details.");
@@ -56,8 +54,7 @@ export const fetchUserLocationData = async () => {
       console.error("Geolocation is not available in this browser.");
       const enableLocation = window.confirm("Please enable location services to use our app. Do you want to enable it now?");
       if (enableLocation) {
-        // Redirect the user to the device's location settings
-        window.location.href = "settings:apps"; // This might work on some devices
+        window.location.href = "settings:apps";
       }
       return { locationDenied: true };
     }
@@ -69,18 +66,3 @@ export const fetchUserLocationData = async () => {
 
 
 
-/*   export const ResData_API_URL_MOBILE =
-  "https://corsproxy.io/?https://www.swiggy.com/mapi/homepage/getCards?lat=25.473034&lng=81.878357"; */
-
-export const ITEM_IMG_CDN_URL =
-  "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_208,h_208,c_fit/";
-
-export const ResMenu_Data_API_URL =
-  "https://corsproxy.io/?https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=25.4358011&lng=81.846311&restaurantId=";
-export const MENU_ITEM_TYPE_KEY =
-  "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory";
-export const RESTAURANT_TYPE_KEY =
-  "type.googleapis.com/swiggy.presentation.food.v2.Restaurant";
-
-export const infoWithStyle_Type_key =
-  "type.googleapis.com/swiggy.presentation.food.v2.FavouriteRestaurantInfoWithStyle";
