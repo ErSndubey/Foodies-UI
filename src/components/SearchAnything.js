@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import axios from "axios";
 import { IMG_CDN_URL } from "../config";
 
 function SearchAnyThing() {
@@ -9,14 +8,14 @@ function SearchAnyThing() {
 
   useEffect(() => {
     if (searchTerm) {
-      axios
-        .get(
-          `https://www.swiggy.com/dapi/restaurants/search/suggest?lat=22.7280835&lng=75.80422949999999&str=${searchTerm}g&trackingId=undefined`
-        )
-        .then((response) => {
-          setData(response.data.data.suggestions);
+      fetch(
+        `https://www.swiggy.com/dapi/restaurants/search/suggest?lat=22.7280835&lng=75.80422949999999&str=${searchTerm}g&trackingId=undefined`
+      )
+        .then(response => response.json())
+        .then(responseData => {
+          setData(responseData.data.suggestions);
         })
-        .catch((error) => {
+        .catch(error => {
           console.error("Error fetching data:", error);
         });
     }
@@ -82,19 +81,18 @@ function SearchAnyThing() {
   );
 }
 
-
 function PopularCuisines() {
   const [popularCuisines, setPopularCuisines] = useState([]);
 
   useEffect(() => {
     // Fetch popular cuisine suggestions from the API
-    axios
-      .get("https://corsproxy.io/?https://www.swiggy.com/mapi/landing/PRE_SEARCH?lat=12.9715987&lng=77.5945627")
-      .then((response) => {
-        console.log(response.data);
-        setPopularCuisines(response.data.data.cards[3].card.card.gridElements.infoWithStyle.info);
+    fetch("https://corsproxy.io/?https://www.swiggy.com/mapi/landing/PRE_SEARCH?lat=12.9715987&lng=77.5945627")
+      .then(response => response.json())
+      .then(responseData => {
+        console.log(responseData);
+        setPopularCuisines(responseData.data.cards[3].card.card.gridElements.infoWithStyle.info);
       })
-      .catch((error) => {
+      .catch(error => {
         console.error("Error fetching popular cuisines:", error);
       });
   }, []);
@@ -121,8 +119,5 @@ function PopularCuisines() {
     </div>
   );
 }
-
-
-
 
 export default SearchAnyThing;

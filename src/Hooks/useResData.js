@@ -1,5 +1,4 @@
 import { ResData_API_URL_DESKTOP, fetchUserLocationData } from "../config";
-import axios from "axios";
 
 export const useResData = async (setRestaurants, setFilteredRestaurants, setUserLocation) => {
   const deviceType = window.innerWidth >= 769 ? "desktop" : "mobile";
@@ -35,13 +34,13 @@ export const useResData = async (setRestaurants, setFilteredRestaurants, setUser
   }
 
   try {
-    const response = await axios.get(apiUrl);
+    const response = await fetch(apiUrl);
 
-    if (response.status !== 200) {
+    if (!response.ok) {
       throw new Error("Network response was not ok.");
     }
 
-    const json = response.data;
+    const json = await response.json();
     console.log(json);
 
     const restaurants =

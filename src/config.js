@@ -1,5 +1,3 @@
-import axios from "axios";
-
 export const IMG_CDN_URL = "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/";
 export const ResData_API_URL_DESKTOP = "https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING";
 export const BING_MAPS_API_KEY = "AiByuWBZ4x5S251J2juqm8pDyd38lMRbDHmGUjHzyHm-e0t19MxCcKD-TF_5OPtL";
@@ -21,10 +19,10 @@ export const fetchUserLocationData = async () => {
       const longitude = position.coords.longitude;
 
       const reverseGeocodeUrl = `https://dev.virtualearth.net/REST/v1/Locations/${latitude},${longitude}?key=${apiKey}`;
-      const response = await axios.get(reverseGeocodeUrl);
+      const response = await fetch(reverseGeocodeUrl);
 
-      if (response.status === 200) {
-        const data = response.data;
+      if (response.ok) {
+        const data = await response.json();
         console.log(data);
         const address = data.resourceSets[0]?.resources[0]?.address;
         const district = address.adminDistrict2;
@@ -39,7 +37,7 @@ export const fetchUserLocationData = async () => {
         return {
           corsProxyUrl_Mobile,
           corsProxyUrl_Desktop,
-  /*         apiUrl_Mobile,
+          /* apiUrl_Mobile,
           apiUrl_Desktop, */
           district,
           state,
@@ -61,6 +59,3 @@ export const fetchUserLocationData = async () => {
     return { locationError: true };
   }
 };
-
-
-
