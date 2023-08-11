@@ -43,9 +43,7 @@ export const fetchUserLocationData = async () => {
           apiUrl_Desktop, */
           district,
           state,
-          country,
-          latitude,
-          longitude
+          country
         };
       } else {
         throw new Error("Failed to fetch city details.");

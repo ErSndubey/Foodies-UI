@@ -1,24 +1,26 @@
 import { ResData_API_URL_DESKTOP, fetchUserLocationData } from "../config";
+import axios from "axios";
 
-export const useResData = async (setRestaurants, setFilteredRestaurants ,setUserLocation) => {
-  const deviceType = window.innerWidth >= 852 ? "desktop" : "mobile";
+export const useResData = async (setRestaurants, setFilteredRestaurants, setUserLocation) => {
+  const deviceType = window.innerWidth >= 769 ? "desktop" : "mobile";
   let apiUrl;
-console.log(deviceType);
+  console.log(deviceType);
+
   if (deviceType === "desktop") {
-    
-    const data = await fetchUserLocationData();
-    apiUrl = data.corsProxyUrl_Desktop;
-    setUserLocation({
-      district: data.district,
-      state: data.state,
-      country: data.country,
-    });
-  } else {
-    
-  
-   
     try {
-      // Call the ResData_API_URL_MOBILE function to get the URL
+      const data = await fetchUserLocationData();
+      apiUrl = data.corsProxyUrl_Desktop;
+      setUserLocation({
+        district: data.district,
+        state: data.state,
+        country: data.country,
+      });
+    } catch (error) {
+      console.error("Error getting desktop API URL:", error);
+      return;
+    }
+  } else {
+    try {
       const data = await fetchUserLocationData();
       apiUrl = data.corsProxyUrl_Mobile;
       setUserLocation({
@@ -32,34 +34,26 @@ console.log(deviceType);
     }
   }
 
- 
   try {
-    /*  const data = await fetch(apiUrl); */
-    const data = await fetch(apiUrl);
+    const response = await axios.get(apiUrl);
 
-    if (!data.ok) {
+    if (response.status !== 200) {
       throw new Error("Network response was not ok.");
     }
 
-    const json = await data.json();
+    const json = response.data;
     console.log(json);
 
     const restaurants =
       deviceType === "desktop"
-        ? json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
-            ?.restaurants
-        : json?.data?.success?.cards[1]?.gridWidget?.gridElements?.infoWithStyle
-            ?.restaurants;
-            
-  
+        ? json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+        : json?.data?.success?.cards[1]?.gridWidget?.gridElements?.infoWithStyle?.restaurants;
+
     setRestaurants(restaurants);
     setFilteredRestaurants(restaurants);
 
     return [setRestaurants, setFilteredRestaurants];
   } catch (error) {
-    console.error(
-      "An error occurred while fetching or processing data:",
-      error
-    );
+    console.error("An error occurred while fetching or processing data:", error);
   }
 };
