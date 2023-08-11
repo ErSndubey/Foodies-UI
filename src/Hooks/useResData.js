@@ -33,7 +33,6 @@ console.log(deviceType);
   }
 
  
-
   try {
     /*  const data = await fetch(apiUrl); */
     const data = await fetch(apiUrl);
