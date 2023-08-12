@@ -9,7 +9,7 @@ function SearchAnyThing() {
   useEffect(() => {
     if (searchTerm) {
       fetch(
-        `https://www.swiggy.com/dapi/restaurants/search/suggest?lat=22.7280835&lng=75.80422949999999&str=${searchTerm}g&trackingId=undefined`
+        `https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/search/suggest?lat=22.7280835&lng=75.80422949999999&str=${searchTerm}g&trackingId=undefined`
       )
         .then(response => response.json())
         .then(responseData => {
