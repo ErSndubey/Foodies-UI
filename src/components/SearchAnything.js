@@ -64,7 +64,7 @@ function SearchAnyThing() {
                     key={item.text}
                     className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
                   >
-                    <strong>{item.highlightedText}</strong> - {item.type}
+                    <strong>{item.text}</strong> - {item.type}
                   </li>
                 ))}
               </ul>
