@@ -26,8 +26,8 @@ const BottomNavigation = () => {
         <img src={DiningIcon} alt="Dining" className="w-6 h-6" />
         <span className="text-sm"></span>
       </Link> */}
-      <Link to="/profile" className="text-center">
-        <img src={CartIcon} alt="Profile" className="w-6 h-6 " />
+      <Link to="/cart" className="text-center">
+        <img src={CartIcon} alt="cart" className="w-6 h-6 " />
         <span className="text-sm"></span>
       </Link>
     </nav>
