@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Modal from "react-modal";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate  } from "react-router-dom";
 import useCart from "../Hooks/useCart";
 import useResMenuData from "../Hooks/useResMenuData";
 import {
@@ -13,6 +13,7 @@ import {
 import ShimmerMenu from "../Shimmer/ShimmerMenu";
 
 const RestaurantMenu = () => {
+  const navigate = useNavigate();
   const { resId } = useParams();
   const { cartItems, addToCart } = useCart();
   const [selectedImage, setSelectedImage] = useState(null);
@@ -31,10 +32,25 @@ const RestaurantMenu = () => {
     setSelectedImage(null);
   };
 
+  const handleGoBack = () => {
+    navigate(-1); // Use navigate directly
+  };
+
   return !restaurant ? (
     <ShimmerMenu />
   ) : (
-    <div className="container mx-auto mt-8">
+    
+    <>
+           {/* Back button */}
+           <button className="flex items-center mt-4 m-3 text-gray-600 mb-4" onClick={handleGoBack}>
+      <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+      </svg>
+      Back
+    </button>
+    <div className="container mx-auto mt-4">
+
+
       <div className="container flex justify-between m-4 border-b border-dashed border-gray-500 pb-4">
         <div className="text-gray-600">
           <h2 className="font-bold text-2xl ">{restaurant?.name}</h2>
@@ -45,7 +61,7 @@ const RestaurantMenu = () => {
             <span>{restaurant.areaName}</span>, <span>{restaurant.city}</span>
           </h2>
         </div>
-        <div className=" w-48 max-w-[7rem] xl:w-28 lg:w-28 md:w-6 h-20 border mr-7 rounded border-gray-300 p-3 flex flex-col items-center">
+        <div className=" w-48 max-w-[7rem] xl:w-28 lg:w-28 md:w-24 h-20 border mr-7 rounded border-gray-300 p-3 flex flex-col items-center">
           <h2 className="text-gray-600">{restaurant?.avgRating} ⭐</h2>
           <h4 className="text-sm text-gray-600">
             {restaurant?.totalRatingsString}
@@ -67,7 +83,7 @@ const RestaurantMenu = () => {
                 <img
                   src={ITEM_IMG_CDN_URL + item?.imageId}
                   alt={item?.name}
-                  className="w-80 h-24 max-w-[8rem] xl:w-32 md:w-32 object-cover rounded-md border border-gray-100 cursor-pointer"
+                  className="w-64 h-24 max-w-[8rem] xl:w-32 md:w-32 object-cover rounded-md border border-gray-100 cursor-pointer"
                   onClick={() => openImageModal(ITEM_IMG_CDN_URL + item?.imageId)}
                 />
                 <button
@@ -117,7 +133,7 @@ const RestaurantMenu = () => {
                 <p className="text-gray-700 font-bold my-1">
                   ₹ {item?.price / 100}
                 </p>
-                <h3 className="text-gray-500 font-normal text-xs font mb-2 line-clamp-2 md:line-clamp-none ">
+                <h3 className="text-gray-400 font-normal text-sm font mb-2 line-clamp-3 md:line-clamp-none">
                   {item?.description}
                 </h3>
               </div>
@@ -142,6 +158,7 @@ const RestaurantMenu = () => {
         </div>
       </Modal>
     </div>
+    </>
   );
 };
 

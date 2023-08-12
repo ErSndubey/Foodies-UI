@@ -11,11 +11,11 @@ function SearchAnyThing() {
       fetch(
         `https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/search/suggest?lat=22.7280835&lng=75.80422949999999&str=${searchTerm}g&trackingId=undefined`
       )
-        .then(response => response.json())
-        .then(responseData => {
+        .then((response) => response.json())
+        .then((responseData) => {
           setData(responseData.data.suggestions);
         })
-        .catch(error => {
+        .catch((error) => {
           console.error("Error fetching data:", error);
         });
     }
@@ -56,15 +56,32 @@ function SearchAnyThing() {
           {data.length > 0 && (
             <div
               ref={suggestionsRef}
-              className="suggestions absolute bg-white border rounded shadow-md mt-2 w-full max-h-40 overflow-y-auto"
+              className="suggestions absolute bg-white border rounded shadow-md mt-2 w-full mb-5  overflow-y-auto"
             >
               <ul>
                 {data.map((item) => (
                   <li
                     key={item.text}
-                    className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                    className="px-4 py-4 hover:bg-gray-100 cursor-pointer"
                   >
-                    <strong>{item.text}</strong> - {item.type}
+                    <div className="flex items-center">
+                      <img
+                        src={`${IMG_CDN_URL}${item.cloudinaryId}`}
+                        alt="cuisine Image"
+                        className="w-14 h-14 rounded-md"
+                      />
+                      <div
+                        id="suggestions"
+                        className="flex flex-col mx-3 text-center"
+                      >
+                        <div className="text-sm">
+                          <strong>{item.text}</strong>
+                        </div>
+                        <div className="text-xs flex -mt-0.5 justify-start">
+                          {item.tagToDisplay}
+                        </div>
+                      </div>
+                    </div>
                   </li>
                 ))}
               </ul>
@@ -86,13 +103,17 @@ function PopularCuisines() {
 
   useEffect(() => {
     // Fetch popular cuisine suggestions from the API
-    fetch("https://corsproxy.io/?https://www.swiggy.com/mapi/landing/PRE_SEARCH?lat=12.9715987&lng=77.5945627")
-      .then(response => response.json())
-      .then(responseData => {
+    fetch(
+      "https://corsproxy.io/?https://www.swiggy.com/mapi/landing/PRE_SEARCH?lat=12.9715987&lng=77.5945627"
+    )
+      .then((response) => response.json())
+      .then((responseData) => {
         console.log(responseData);
-        setPopularCuisines(responseData.data.cards[3].card.card.gridElements.infoWithStyle.info);
+        setPopularCuisines(
+          responseData.data.cards[3].card.card.gridElements.infoWithStyle.info
+        );
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Error fetching popular cuisines:", error);
       });
   }, []);
@@ -106,11 +127,11 @@ function PopularCuisines() {
         {popularCuisines.map((cuisine) => (
           <div key={cuisine.id} className="w-1/4 p-2">
             <a href={`${cuisine.link}`}>
-            <img
-              src={`${IMG_CDN_URL}${cuisine.imageId}`}
-              alt={cuisine.name}
-              className="w-full h-auto rounded-md"
-            />
+              <img
+                src={`${IMG_CDN_URL}${cuisine.imageId}`}
+                alt={cuisine.name}
+                className="w-full h-auto rounded-md"
+              />
             </a>
             <p className="mt-2 text-center text-gray-600">{cuisine.name}</p>
           </div>
