@@ -7,6 +7,9 @@ import SearchIcon from "../Images/search-icon.svg";
 import LocationIocn from "../Images/location-icon.svg";
 import { useResData } from "../Hooks/useResData";
 
+
+
+
 const Body = () => {
   const [searchText, setSearchText] = useState("");
   const [restaurants, setRestaurants] = useState([]);
@@ -18,11 +21,13 @@ const Body = () => {
     country: null,
   });
 
+
   useEffect(() => {
     // getRestaurant function call
     useResData(setRestaurants, setFilteredRestaurants, setLocationData);
   }, []);
-  const userLocation = locationData;
+
+
   return restaurants?.length === 0 && filteredRestaurants?.length === 0 ? (
     <ShimmerMain />
   ) : (
