@@ -61,7 +61,7 @@ const RestaurantMenu = () => {
             <span>{restaurant.areaName}</span>, <span>{restaurant.city}</span>
           </h2>
         </div>
-        <div className=" w-48 max-w-[7rem] xl:w-28 lg:w-28 md:w-24 h-20 border mr-7 rounded border-gray-300 p-3 flex flex-col items-center">
+        <div className=" w-48 max-w-[7rem] xl:w-28 lg:w-28 md:w-28 h-20 border mr-7 rounded border-gray-300 p-3 flex flex-col items-center">
           <h2 className="text-gray-600">{restaurant?.avgRating} ⭐</h2>
           <h4 className="text-sm text-gray-600">
             {restaurant?.totalRatingsString}

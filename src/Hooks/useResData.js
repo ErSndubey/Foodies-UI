@@ -44,10 +44,12 @@ export const useResData = async (setRestaurants, setFilteredRestaurants, setUser
     console.log(json);
 
     const restaurants =
-      deviceType === "desktop"
-        ? json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-        : json?.data?.success?.cards[1]?.gridWidget?.gridElements?.infoWithStyle?.restaurants;
-
+    deviceType === "desktop"
+      ? json?.data?.cards
+          .find((card) => card.card?.card?.gridElements?.infoWithStyle?.restaurants)
+          ?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      : json?.data?.success?.cards[1]?.gridWidget?.gridElements?.infoWithStyle?.restaurants;
+  
     setRestaurants(restaurants);
     setFilteredRestaurants(restaurants);
 
