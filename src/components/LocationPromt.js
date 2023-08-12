@@ -33,7 +33,7 @@ const LocationPrompt = () => {
 
   return (
     <div className="h-screen flex flex-col">
-      <div className="h-3/4 relative overflow-hidden">
+      <div className="h-3/5 relative overflow-hidden">
         <div
           className="  flex transition-transform duration-500 ease-in-out"
           style={{ transform: `translateX(-${currentImageIndex * 100}%)` }}
@@ -43,7 +43,7 @@ const LocationPrompt = () => {
               key={index}
               src={image}
               alt={`Image ${index}`}
-              className="h-screen"
+              className="h-full"
             />
           ))}
         </div>
