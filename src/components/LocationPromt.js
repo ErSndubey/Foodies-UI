@@ -32,7 +32,7 @@ const LocationPrompt = () => {
   }, []); // Empty dependency array ensures the effect runs only once
 
   return (
-    <div className="h-screen flex flex-col sm:justify-center sm:bg-[url('https://a-static.besthdwallpaper.com/western-food-hamburger-french-fries-and-variety-of-vegetable-in-one-table-wallpaper-1366x768-60595_46.jpg')] sm:bg-cover bg-center  sm:items-center"  >
+    <div className="h-screen flex flex-col sm:justify-center sm:bg-[url('https://png.pngtree.com/background/20230524/original/pngtree-lot-of-food-sitting-on-a-table-picture-image_2706274.jpg')] sm:bg-cover bg-center  sm:items-center"  >
       <div className="h-3/5 relative overflow-hidden visible sm:hidden">
         <div
           className="  flex transition-transform duration-500 ease-in-out"

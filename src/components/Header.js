@@ -7,7 +7,7 @@ import DiningIcon from "../Images/dining-icon.svg";
 import ProfileIcon from "../Images/profile-icon.svg";
 import CartIcon from "../Images/cart-icon.svg";
 import SearchLocation from "./SearchLocation";
-import SearchAnything from "./SearchAnything";
+
 
 const Header = () => {
   const [userLocation, setUserLocation] = useState(null);
@@ -77,7 +77,7 @@ const Header = () => {
             className="w-6 h-6 mr-2 hidden lg:block"
           />
         </Link>
-        <Link to="/CartPage">
+        <Link to="/cart">
           <img
             src={CartIcon}
             alt="Cart"
