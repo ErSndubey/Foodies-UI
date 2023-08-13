@@ -37,8 +37,7 @@ const AppLayout = () => {
 
   // If the location is off, render the LocationPrompt component
   if (!isLocationOn) {
-    return 
-    <LocationPrompt />;
+    return <LocationPrompt />;
   }
 
   // Render the main content if the location is on
