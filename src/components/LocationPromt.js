@@ -48,7 +48,7 @@ const LocationPrompt = () => {
           ))}
         </div>
       </div>
-      <div className="flex flex-col mx-auto rounded-md shadow-lg sm:bg-gray-100 w-1/2">
+      <div className="flex flex-col mx-auto md:rounded-md md:shadow-lg sm:bg-gray-100 md:w-1/2">
         <h1 className="flex mx-auto font-bold text-xl text-gray-600 mt-5">
           Quick delivery to your doorstep
         </h1>
