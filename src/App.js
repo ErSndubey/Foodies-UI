@@ -1,40 +1,44 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Body from "./components/Body";
-import { createBrowserRouter, Outlet, RouterProvider, useLocation } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Outlet,
+  RouterProvider,
+  useLocation,
+} from "react-router-dom";
 import Error from "./components/Error";
-import Offers from "./components/Offers";
-import CartPage from "./components/CartPage.js";
 import RestaurantMenu from "./components/RestaurantMenu";
 import BottomNav from "./components/BottomNav";
 import Dining from "./components/Dining";
-import Profile from "./components/Profile";
-import SearchAnyThing from "./components/SearchAnything";
 import useLocationStatus from "./Hooks/useLocationStatus";
 import LocationPrompt from "./components/LocationPromt";
+import ShimmerMenu from "./Shimmer/ShimmerMenu";
+
+const SearchAnyThing = lazy(() => import("./components/SearchAnything"));
+const Offers = lazy(() => import("./components/Offers"));
+const CartPage = lazy(() => import("./components/CartPage.js"));
+const Profile = lazy(() => import("./components/Profile"));
 
 const AppLayout = () => {
   // Check if the current screen width falls within the "mobile or tablet" range
   const isMobileOrTablet = window.matchMedia("(max-width: 821px)").matches;
-  
+
   // Get the current location using the useLocation hook from react-router-dom
   const location = useLocation();
-  
 
-  
   // Check if the current route is "/search"
   const isSearchRoute = location.pathname === "/search";
 
   // Get the status of the user's location using a custom hook (useLocationStatus)
-const isLocationOn = useLocationStatus(); // Assume location is on initially
-
+  const isLocationOn = useLocationStatus(); // Assume location is on initially
 
   // If the location is off, render the LocationPrompt component
   if (!isLocationOn) {
-    return <LocationPrompt />;
+    return 
+    <LocationPrompt />;
   }
 
   // Render the main content if the location is on
@@ -42,16 +46,13 @@ const isLocationOn = useLocationStatus(); // Assume location is on initially
     <>
       <Header />
       <Outlet /> {/* This is likely related to react-router */}
-      
       {/* Conditionally render the Footer if not on the "/search" route */}
       {!isSearchRoute && <Footer />}
-      
       {/* Conditionally render the BottomNav on mobile or tablet */}
       {isMobileOrTablet && <BottomNav />}
     </>
   );
 };
-
 
 const appRouter = createBrowserRouter([
   {
@@ -65,15 +66,28 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/search",
-        element: <SearchAnyThing />,
+
+        element: (
+          <Suspense fallback={ShimmerMenu}>
+            <SearchAnyThing/>
+          </Suspense>
+        ),
       },
       {
         path: "/Offers",
-        element: <Offers />,
+        element: (
+          <Suspense fallback={ShimmerMenu}>
+            <Offers />
+          </Suspense>
+        ),
       },
       {
         path: "/cart",
-        element: <CartPage />,
+        element: (
+          <Suspense fallback={ShimmerMenu}>
+            <CartPage />
+          </Suspense>
+        ),
       },
       {
         path: "/Dining",
@@ -81,7 +95,11 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/Profile",
-        element: <Profile />,
+        element: (
+          <Suspense fallback={ShimmerMenu}>
+            <Profile />
+          </Suspense>
+        ),
       },
       {
         path: "/restaurant/:resId",
