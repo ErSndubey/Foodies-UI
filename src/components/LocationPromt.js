@@ -32,8 +32,8 @@ const LocationPrompt = () => {
   }, []); // Empty dependency array ensures the effect runs only once
 
   return (
-    <div className="h-screen flex flex-col">
-      <div className="h-3/5 relative overflow-hidden">
+    <div className="h-screen flex flex-col sm:justify-center sm:bg-[url('https://a-static.besthdwallpaper.com/western-food-hamburger-french-fries-and-variety-of-vegetable-in-one-table-wallpaper-1366x768-60595_46.jpg')] sm:bg-cover bg-center  sm:items-center"  >
+      <div className="h-3/5 relative overflow-hidden visible sm:hidden">
         <div
           className="  flex transition-transform duration-500 ease-in-out"
           style={{ transform: `translateX(-${currentImageIndex * 100}%)` }}
@@ -48,8 +48,8 @@ const LocationPrompt = () => {
           ))}
         </div>
       </div>
-      <div className="flex flex-col mx-auto">
-        <h1 className="flex font-bold text-xl text-gray-600 mt-5">
+      <div className="flex flex-col mx-auto rounded-md shadow-lg sm:bg-gray-100 w-1/2">
+        <h1 className="flex mx-auto font-bold text-xl text-gray-600 mt-5">
           Quick delivery to your doorstep
         </h1>
         <h1 className="flex  justify-center text-sm text-gray-400 my-4">

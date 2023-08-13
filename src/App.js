@@ -17,42 +17,41 @@ import useLocationStatus from "./Hooks/useLocationStatus";
 import LocationPrompt from "./components/LocationPromt";
 
 const AppLayout = () => {
+  // Check if the current screen width falls within the "mobile or tablet" range
   const isMobileOrTablet = window.matchMedia("(max-width: 821px)").matches;
+  
+  // Get the current location using the useLocation hook from react-router-dom
   const location = useLocation();
-  const [contentVisible, setContentVisible] = useState(true);
-  // Check if the current route is SearchAnyThing
+  
+
+  
+  // Check if the current route is "/search"
   const isSearchRoute = location.pathname === "/search";
 
-  const locationOn = useLocationStatus();
+  // Get the status of the user's location using a custom hook (useLocationStatus)
+const isLocationOn = useLocationStatus(); // Assume location is on initially
 
-  useEffect(() => {
-    if (!locationOn) {
-      // Show the dialog after a short delay if location is off
-      const timeout = setTimeout(() => {
-        setContentVisible(false);
-      }, 3000);
 
-      return () => clearTimeout(timeout);
-    }
-  }, [locationOn]);
-
-  if (!locationOn) {
+  // If the location is off, render the LocationPrompt component
+  if (!isLocationOn) {
     return <LocationPrompt />;
   }
 
+  // Render the main content if the location is on
   return (
     <>
       <Header />
-
-      <Outlet />
+      <Outlet /> {/* This is likely related to react-router */}
       
-      {/* Conditionally render Footer */}
+      {/* Conditionally render the Footer if not on the "/search" route */}
       {!isSearchRoute && <Footer />}
       
+      {/* Conditionally render the BottomNav on mobile or tablet */}
       {isMobileOrTablet && <BottomNav />}
     </>
   );
 };
+
 
 const appRouter = createBrowserRouter([
   {
