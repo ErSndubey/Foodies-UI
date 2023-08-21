@@ -32,8 +32,7 @@ export const useResData = async (setRestaurants, setFilteredRestaurants, setUser
       return;
     }
   }
-
-  try {
+try {
     const response = await fetch(apiUrl);
 
     if (!response.ok) {
