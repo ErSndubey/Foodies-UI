@@ -52,8 +52,8 @@ const LocationPrompt = () => {
         <h1 className="flex mx-auto font-bold text-xl text-gray-600 mt-5">
           Quick delivery to your doorstep
         </h1>
-        <h1 className="flex  justify-center text-sm text-gray-400 my-4">
-          Ready to see top restaurants around you?
+        <h1 className="flex  justify-center text-base text-gray-400 my-4 px-5">
+        Please enable your computer's location settings and grant location access to find nearby restaurants.
         </h1>
         <button
           className="bg-blue-500 text-white px-4 mx-auto flex py-2 rounded hover:bg-red-600 transition-colors duration-300 ease-in-out"
