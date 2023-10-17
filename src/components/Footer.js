@@ -11,7 +11,9 @@ const Footer = () => {
                 <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
                   Foodies
                 </span>
+                
               </a>
+              <p className=' text-white font-semibold'> [ Developed with ❤️ by <a href="https://www.linkedin.com/in/ersndubey/" className='underline text-pink-400'> Sachchidanand Dubey </a>]</p>
             </div>
             <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-4">
               <div>
