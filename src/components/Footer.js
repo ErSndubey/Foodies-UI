@@ -197,6 +197,14 @@ const Footer = () => {
             </div>
           </div>
         </div>
+                      <div className="flex items-center justify-center  my-7">
+       
+         
+     &copy; 2023 <img src={logo} alt="Footer logo" className='w-3 h-auto mx-1 ' /><span>MyCart</span> 
+       
+        <p className='mx-2'> [ Developed with ❤️ by <a href="https://www.linkedin.com/in/ersndubey/" className='underline text-pink-400'> Sachchidanand Dubey </a>]</p>
+        
+      </div>
       </footer>
     </>
   );
